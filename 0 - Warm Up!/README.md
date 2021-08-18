@@ -6,7 +6,7 @@ All the practical activities are going to be implemented at Javascript using the
 
 ### 1 - Write a program that displays the message "Hello World" when run.
 
-### 2 - Write a program that calculates the quantity of pair numbers in an randomly generated array containing ten unsigned integers.
+### 2 - Write a program that calculates the quantity of even numbers in an randomly generated array containing ten unsigned integers.
 
 ### 3 - Implement the Quicksort algorithm.
 
