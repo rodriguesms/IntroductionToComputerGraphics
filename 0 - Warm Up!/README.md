@@ -12,13 +12,13 @@ All the practical activities are going to be implemented at Javascript using the
 
 ### 4 - Create a small Javascript library that defines a Vector class containing three elements and a 3x3 dimension Matrix class. Then, implement the following functions that operates the following tasks among them:
 
-    * Vector norm
-    * Cross product between two vectors
-    * Dot product between two vectors
-    * Vector/Matrix product
-    * Matrix/Matrix product
-    * Determinant of a matrix
-    * Transpose of a matrix
+* Vector norm
+* Cross product between two vectors
+* Dot product between two vectors
+* Vector/Matrix product
+* Matrix/Matrix product
+* Determinant of a matrix
+* Transpose of a matrix
   
 ### 5 - Create drawings directly in a `<canvas>` HTML element at runtime using Javascript.
 
