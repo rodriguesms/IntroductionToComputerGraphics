@@ -5,6 +5,7 @@
         <meta name="viewport" content="width-device-width, initial-scale=1.0">
         <title>Javascript Activities</title>
         <link rel="stylesheet" href="style.css">
+        <script src="index.js"></script>
     </head>
     <body>
         <section class="header">
@@ -16,12 +17,20 @@
                         •
                         <li><a href="">Even Numbers</a></li>
                         •
-                        <li><a href="">Quicksort</a></li>
+                        <li><a href="../3/third.html">Quicksort</a></li>
                         •
-                        <li><a href="">Vector | Matrix</a></li>
+                        <li><a href="../4/fourth.html">Vector | Matrix</a></li>
                         •
-                        <li><a href="">Drawing</a></li>
+                        <li><a href="../5/fifth.html">Drawing</a></li>
                     </ul>
+                    <div class="even-numbers-box">
+                        <h1>Even Numbers</h1>
+                        <p>Write a program that calculates the quantity of even numbers in an randomly generated array containing ten unsigned integers.</p>
+                        <div class="input-box">
+                            <input type="number" id="value" placeholder="Max value (default: 1000)">
+                            <button onclick="evenQuantArray(parseInt(document.getElementById('value').value))">Generate</button>    
+                        </div>
+                    </div>
                 </div>
             </nav>
         </section>
