@@ -3,7 +3,7 @@ const evenQuantArray = (max_value) => {
 
     Number.isNaN(max_value) ? max_value=1000 : max_value=max_value; // if input parameter is empty (""), parseInt sends NaN
 
-    if(max_value > Number.MAX_SAFE_INTEGER)    
+    if(!Number.isSafeInteger(max_value))    
         alert("ERROR: Selected number is too large!");
 
     else if(max_value < 0)

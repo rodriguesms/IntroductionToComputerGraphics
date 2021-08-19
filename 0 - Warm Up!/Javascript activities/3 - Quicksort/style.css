@@ -26,7 +26,7 @@ nav a {
     text-decoration: none;
     font-size: 24px;
     font-family: 'Roboto', sans-serif;
-    font-weight: 400;
+    font-weight: bold;
 }
 
 .nav-links ul {
@@ -46,7 +46,7 @@ nav a {
 
 .nav-links ul li a{
     font-family: 'Roboto', sans-serif;
-    font-weight: 100;
+    font-weight: lighter;
     color: #FFF;
     text-decoration: none;
     font-size: 18px;
