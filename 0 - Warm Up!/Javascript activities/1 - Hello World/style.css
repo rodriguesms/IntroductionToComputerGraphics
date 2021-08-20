@@ -108,7 +108,7 @@ nav a {
 }
 
 .btn:hover {
-    border-width: 1px;
+    border-width: 2px;
     background-color: #53a0fd;
     color: #fff;
   }
