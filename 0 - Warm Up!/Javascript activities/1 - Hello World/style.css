@@ -7,9 +7,8 @@
 .header{
     min-height: 100vh;
     width: 100%;
-    background-image: 
-        linear-gradient(45deg, #3023ae 0%, #53a0fd 100%);
-    background-position: center;
+    background-color: #000000;
+    background-image: linear-gradient(315deg, #000000 0%, #414141 74%);    background-position: center;
     background-size: cover;
     position: relative;
 }
@@ -91,7 +90,7 @@ nav a {
     cursor: pointer;
     display: inline-block;
     text-decoration: none;
-    color: #3023ae;
+    color: #414141;
     width: 150px;
     height: 50px;
     margin-top: 10px;
@@ -109,6 +108,6 @@ nav a {
 
 .btn:hover {
     border-width: 2px;
-    background-color: #53a0fd;
+    background-color: #414141;
     color: #fff;
   }
