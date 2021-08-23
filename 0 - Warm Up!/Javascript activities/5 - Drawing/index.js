@@ -170,6 +170,8 @@ const drawOuterCurves = () => {
     outerCurves.stroke();
 }
 
+//Drawing element => Calling the specific functions for each part of the Seal
+
 drawOuterCircle();
 drawInnerCircle();
 drawMainTriangle();
