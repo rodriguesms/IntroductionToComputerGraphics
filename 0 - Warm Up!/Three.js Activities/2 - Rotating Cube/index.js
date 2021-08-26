@@ -27,12 +27,8 @@ edge.rotation.z += 0.75;
 const rotate = () => {
 
     requestAnimationFrame(rotate);
-
-    //cube.rotation.x += 0.01;
-    //edge.rotation.x += 0.01;
     cube.rotation.y += 0.01;
     edge.rotation.y += 0.01;
-
 
     renderer.render( scene, camera );
 }

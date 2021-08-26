@@ -23,103 +23,103 @@
                         •
                         <li><a href="../5 - Drawing/fifth.html">Drawing</a></li>
                     </ul>
-                    <div class="vector-matrix-box">
-                        <h1>Vector | Matrix</h1>
-                        <p>Create a small Javascript library that defines a Vector class containing three elements and a 3x3 dimension Matrix class.</p>
-                        <div class="creation-box">
-                            <div class="vector-box">
-                                <input type="number" placeholder="i1" id="i1">
-                                <input type="number" placeholder="i2" id="i2">
-                                <input type="number" placeholder="i3" id="i3">
-                                <Button class="button" onclick="createVector(document.getElementById('i1').value,
-                                                                                    document.getElementById('i2').value,
-                                                                                    document.getElementById('i3').value)">Create Vector</Button>
-                                <Button class="button" onclick="showAllVectors()">Show Vectors</Button>
-                            </div>
-                            <div class="vector-operations">
-                                <div class="vector-product">   
-                                    <div class="vector-input">
-                                        <input type="number" placeholder="Vector1 Id" id="vectorCross1">
-                                        <input type="number" placeholder="Vector2 Id" id="vectorCross2">    
-                                    </div>
-                                    <Button class="button" onclick="getCrossProduct(document.getElementById('vectorCross1').value,
-                                                                                    document.getElementById('vectorCross2').value)">Cross Product</Button>
-                                </div>
-                                <div class="vector-product">
-                                    <div class="vector-input">
-                                        <input type="number" placeholder="Vector1 Id" id="vectorDot1">
-                                        <input type="number" placeholder="Vector2 Id" id="vectorDot2">    
-                                    </div>
-                                    <Button class="button" onclick="getDotProduct(document.getElementById('vectorDot1').value,
-                                                                                  document.getElementById('vectorDot2').value)">Dot Product</Button>
-                                </div>
-                                <div class="vector-oneInput">
-                                    <div class="vector-input">
-                                        <input type="number" placeholder="Vector1 Id" id="vectorDot1">
-                                    </div>
-                                    <Button class="button" onclick="getVectorNorm(document.getElementById('vectorDot1').value)">Vector's Norm</Button>
-                                </div>
-                            </div>
-                            <div class="matrix-box">
-                                <div class="vector-box">
-                                    <input type="number" placeholder="i1j1" id="i1j1">
-                                    <input type="number" placeholder="i1j2" id="i1j2">
-                                    <input type="number" placeholder="i1j3" id="i1j3">
-                                </div>
-                                <div class="vector-box">
-                                    <input type="number" placeholder="i2j1" id="i2j1">
-                                    <input type="number" placeholder="i2j2" id="i2j2">
-                                    <input type="number" placeholder="i2j3" id="i2j3">
-                                </div>
-                                <div class="vector-box">
-                                    <input type="number" placeholder="i3j1" id="i3j1">
-                                    <input type="number" placeholder="i3j2" id="i3j2">
-                                    <input type="number" placeholder="i3j3" id="i3j3">
-                                </div>
-                                <button class="button" onclick="createMatrix(document.getElementById('i1j1').value,
-                                                                                    document.getElementById('i1j2').value,
-                                                                                    document.getElementById('i1j3').value,
-                                                                                    document.getElementById('i2j1').value,
-                                                                                    document.getElementById('i2j2').value,
-                                                                                    document.getElementById('i2j3').value,
-                                                                                    document.getElementById('i3j1').value,
-                                                                                    document.getElementById('i3j2').value,
-                                                                                    document.getElementById('i3j3').value)"
-                                                                                    >Create Matrix</button>
-                                <Button class="button" onclick="showAllMatrices()">Show Matrices</Button>
-                            </div>
-                            <div class="matrix-operations">
-                                <div class="multiply-matrix">
-                                    <div class="multiply-input">
-                                        <input type="number" placeholder="Matrix1 Id" id="matrix1">
-                                        <input type="number" placeholder="Matrix2 Id" id="matrix2">    
-                                    </div>
-                                    <Button class="button" onclick="multiplyTwoMatrices(document.getElementById('matrix1').value,
-                                                                                                document.getElementById('matrix2').value)">Matrices Product</Button>
-                                </div>
-                                <div class="matrix-determinant">
-                                        <input type="number" placeholder="Matrix Id" id="matrix-determinantId">
-                                    <Button class="button" onclick="getMatrixDeterminant(document.getElementById('matrix-determinantId').value)">Matrix Determinant</Button>
-                                </div>
-                                <div class="matrix-transposal">
-                                    <input type="number" placeholder="Matrix Id" id="matrix-transposalId">
-                                <Button class="button" onclick="getMatrixDeterminant(document.getElementById('matrix-transposalId').value)">Matrix Transposal</Button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="Multiclass-Product">
-                            <div class="vector-product">   
-                                <div class="vector-input">
-                                    <input type="number" placeholder="Vector Id" id="vectorprod">
-                                    <input type="number" placeholder="Matrix Id" id="matrixprod">    
-                                </div>
-                                <Button class="button-multi" onclick="getVectorMatrixProduct(document.getElementById('vectorprod').value,
-                                                                                document.getElementById('matrixprod').value)">Vector | Matrix Product</Button>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </nav>
         </section>
+        <div class="vector-matrix-box">
+            <h1>Vector | Matrix</h1>
+            <p>Create a small Javascript library that defines a Vector class containing three elements and a 3x3 dimension Matrix class.</p>
+            <div class="creation-box">
+                <div class="vector-box">
+                    <input type="number" placeholder="i1" id="i1">
+                    <input type="number" placeholder="i2" id="i2">
+                    <input type="number" placeholder="i3" id="i3">
+                    <Button class="button" onclick="createVector(document.getElementById('i1').value,
+                                                                        document.getElementById('i2').value,
+                                                                        document.getElementById('i3').value)">Create Vector</Button>
+                    <Button class="button" onclick="showAllVectors()">Show Vectors</Button>
+                </div>
+                <div class="vector-operations">
+                    <div class="vector-product">   
+                        <div class="vector-input">
+                            <input type="number" placeholder="Vector1 Id" id="vectorCross1">
+                            <input type="number" placeholder="Vector2 Id" id="vectorCross2">    
+                        </div>
+                        <Button class="button" onclick="getCrossProduct(document.getElementById('vectorCross1').value,
+                                                                        document.getElementById('vectorCross2').value)">Cross Product</Button>
+                    </div>
+                    <div class="vector-product">
+                        <div class="vector-input">
+                            <input type="number" placeholder="Vector1 Id" id="vectorDot1">
+                            <input type="number" placeholder="Vector2 Id" id="vectorDot2">    
+                        </div>
+                        <Button class="button" onclick="getDotProduct(document.getElementById('vectorDot1').value,
+                                                                      document.getElementById('vectorDot2').value)">Dot Product</Button>
+                    </div>
+                    <div class="vector-oneInput">
+                        <div class="vector-input">
+                            <input type="number" placeholder="Vector1 Id" id="vectorDot1">
+                        </div>
+                        <Button class="button" onclick="getVectorNorm(document.getElementById('vectorDot1').value)">Vector's Norm</Button>
+                    </div>
+                </div>
+                <div class="matrix-box">
+                    <div class="vector-box">
+                        <input type="number" placeholder="i1j1" id="i1j1">
+                        <input type="number" placeholder="i1j2" id="i1j2">
+                        <input type="number" placeholder="i1j3" id="i1j3">
+                    </div>
+                    <div class="vector-box">
+                        <input type="number" placeholder="i2j1" id="i2j1">
+                        <input type="number" placeholder="i2j2" id="i2j2">
+                        <input type="number" placeholder="i2j3" id="i2j3">
+                    </div>
+                    <div class="vector-box">
+                        <input type="number" placeholder="i3j1" id="i3j1">
+                        <input type="number" placeholder="i3j2" id="i3j2">
+                        <input type="number" placeholder="i3j3" id="i3j3">
+                    </div>
+                    <button class="button" onclick="createMatrix(document.getElementById('i1j1').value,
+                                                                        document.getElementById('i1j2').value,
+                                                                        document.getElementById('i1j3').value,
+                                                                        document.getElementById('i2j1').value,
+                                                                        document.getElementById('i2j2').value,
+                                                                        document.getElementById('i2j3').value,
+                                                                        document.getElementById('i3j1').value,
+                                                                        document.getElementById('i3j2').value,
+                                                                        document.getElementById('i3j3').value)"
+                                                                        >Create Matrix</button>
+                    <Button class="button" onclick="showAllMatrices()">Show Matrices</Button>
+                </div>
+                <div class="matrix-operations">
+                    <div class="multiply-matrix">
+                        <div class="multiply-input">
+                            <input type="number" placeholder="Matrix1 Id" id="matrix1">
+                            <input type="number" placeholder="Matrix2 Id" id="matrix2">    
+                        </div>
+                        <Button class="button" onclick="multiplyTwoMatrices(document.getElementById('matrix1').value,
+                                                                                    document.getElementById('matrix2').value)">Matrices Product</Button>
+                    </div>
+                    <div class="matrix-determinant">
+                            <input type="number" placeholder="Matrix Id" id="matrix-determinantId">
+                        <Button class="button" onclick="getMatrixDeterminant(document.getElementById('matrix-determinantId').value)">Matrix Determinant</Button>
+                    </div>
+                    <div class="matrix-transposal">
+                        <input type="number" placeholder="Matrix Id" id="matrix-transposalId">
+                    <Button class="button" onclick="getMatrixTransposal(document.getElementById('matrix-transposalId').value)">Matrix Transposal</Button>
+                    </div>
+                </div>
+            </div>
+            <div class="Multiclass-Product">
+                <div class="vector-product">   
+                    <div class="vector-input">
+                        <input type="number" placeholder="Vector Id" id="vectorprod">
+                        <input type="number" placeholder="Matrix Id" id="matrixprod">    
+                    </div>
+                    <Button class="button-multi" onclick="getVectorMatrixProduct(document.getElementById('vectorprod').value,
+                                                                    document.getElementById('matrixprod').value)">Vector | Matrix Product</Button>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

@@ -1,7 +1,8 @@
 // Write a program that calculates the quantity of even numbers in an randomly generated array containing ten unsigned integers
 const evenQuantArray = (max_value) => {
 
-    Number.isNaN(max_value) ? max_value=1000 : max_value=max_value; // if input parameter is empty (""), parseInt sends NaN
+    Number.isNaN(max_value) ? max_value=1000 : max_value=max_value; 
+    // if input parameter is empty (""), parseInt at html, sends NaN
 
     if(!Number.isSafeInteger(max_value))    
         alert("ERROR: Selected number is too large!");

@@ -18,7 +18,7 @@ const renderLeftCube = () => {
 
     scene.add(cube);
     camera.position.z = 3;
-    cube.rotation.z += 0.75;
+    cube.rotation.z = 0.75;
 
     const rotate = () => {
         requestAnimationFrame(rotate);
@@ -47,7 +47,7 @@ const renderMiddleCube = () => {
 
     camera.position.z = 3;
 
-    cube.rotation.z += 0.75;
+    cube.rotation.z = 0.75;
 
 
     const rotate = () => {
@@ -78,7 +78,7 @@ const renderRightCube = () => {
 
     camera.position.z = 3;
 
-    cube.rotation.z += 0.75;
+    cube.rotation.z = 0.75;
 
     const rotate = () => {
         requestAnimationFrame(rotate);
