@@ -3,11 +3,16 @@ const drawOuterCircle = () => {
     outerCircle.beginPath();
     outerCircle.arc(350, 200, 180, 0, Math.PI*2);
 
-    //outerCircle.fillStyle = '#191919';
+    //outerCircle.fillStyle = '#000';
     //outerCircle.fill();
     
     outerCircle.lineWidth = 5;
     outerCircle.strokeStyle = '#FF0000';
+
+    outerCircle.shadowColor = "rgb(82, 0, 0)";
+    outerCircle.shadowOffsetX = 2; 
+    outerCircle.shadowOffsetY = 2;
+
     outerCircle.stroke();
 }
 
@@ -38,7 +43,8 @@ const drawMainTriangle = () => {
 const drawElipseEye = () => {
     let ellipse = document.getElementById('canvas').getContext('2d');
     ellipse.beginPath();
-    ellipse.ellipse(350, 130, 25, 10, 0, 0, 2*Math.PI)
+    ellipse.ellipse(350, 130, 25, 10, 0, 0, 2*Math.PI);
+
     ellipse.lineWidth = 4;
     ellipse.strokeStyle = "#FF0000";
     ellipse.stroke();
@@ -171,12 +177,12 @@ const drawOuterCurves = () => {
 }
 
 //Drawing element => Calling the specific functions for each part of the Seal
-
 drawOuterCircle();
 drawInnerCircle();
 drawMainTriangle();
 drawElipseEye();
 drawMainCurves();
 drawOuterCurves();
+
 
 
