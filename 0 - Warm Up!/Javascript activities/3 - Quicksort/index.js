@@ -5,7 +5,6 @@ const prepareArrayThenGo = (stringArray) => {
     const newArray = []; // new array that is going to store the integer values
     
     JSON.parse(`[${stringArray}]`).forEach(element => { // JSON.parse will transform the stringArray into a array of string numbers
-        console.log(element)
         newArray.push(parseInt(element)); //then, for each string number, parseInt will transform it into a integer and then push into the newArray
     });
     quickSort(newArray, 0, newArray.length-1); // Then, with a preprocessed array, i can now invoke the quicksort function
@@ -13,7 +12,7 @@ const prepareArrayThenGo = (stringArray) => {
 }
 
 
-const quickSort = (array, beginning, end) => {
+const quickSort = (array, beginning, end) => { // The array that should be reorganized, his first and last value are the 
     if(beginning < end){
         let pivot = partition(array, beginning, end);
         quickSort(array, beginning, pivot-1);
@@ -35,6 +34,8 @@ const partition = (array, beginning, end) => {
     return aux + 1;
 }
 
+
+// change 
 const swap = (array, i, j) => { 
     var aux = array[i];
     array[i] = array[j];

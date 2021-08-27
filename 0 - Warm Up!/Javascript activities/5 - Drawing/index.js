@@ -47,6 +47,8 @@ const drawElipseEye = () => {
 
     ellipse.lineWidth = 4;
     ellipse.strokeStyle = "#FF0000";
+    ellipse.shadowOffsetX = 0;
+    ellipse.shadowOffsetY = 0;
     ellipse.stroke();
 }
 
@@ -74,6 +76,9 @@ const drawMainCurves = () => {
 
     curves.moveTo(395, 270);
     curves.lineTo(400, 270)
+
+    curves.shadowOffsetX = 0;
+    curves.shadowOffsetY = 0;
 
 
     curves.strokeStyle = '#FF0000';
@@ -183,6 +188,3 @@ drawMainTriangle();
 drawElipseEye();
 drawMainCurves();
 drawOuterCurves();
-
-
-
