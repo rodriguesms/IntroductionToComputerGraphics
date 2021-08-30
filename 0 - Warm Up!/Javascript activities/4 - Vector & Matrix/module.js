@@ -18,7 +18,7 @@ class Vector {
         return(`Vector ${id}: [ ${this.i1}, ${this.i2}, ${this.i3} ]`);
     }
 
-    norm(){
+    norm(){ //returns a constant that represents the vector's norm  √(i1² + i2² + i3²)
         return Math.sqrt(
             Math.pow(this.i1, 2) +
             Math.pow(this .i2, 2) +
@@ -69,11 +69,11 @@ class Matrix {
 
     
 
-    displayMatrix(){
+    displayMatrix(){/*Shows a new Matrix in the browser*/
               alert(`Created Matrix:\n| ${this.j1.i1}, ${this.j2.i1}, ${this.j3.i1} |\n| ${this.j1.i2}, ${this.j2.i2}, ${this.j3.i2} |\n| ${this.j1.i3}, ${this.j2.i3}, ${this.j3.i3} |`);        
     }
 
-    toString(id){
+    toString(id){ // Transforms the Matrix in a string in order to pass it to a console.log by the return
         
        (id==undefined ? id="result" : null); // if id was not passed, means it doesn't belong to the saved matrices (it is a result of operation)
 
@@ -83,7 +83,7 @@ class Matrix {
         `|${this.j1.i3} ${this.j2.i3} ${this.j3.i3}|`);
     }
 
-    productBetweenMatrices(matrix2){
+    productBetweenMatrices(matrix2){ //It returns a new matrix (not saved)
             return new Matrix(
                 new Vector(
                     ((this.j1.i1*matrix2.j1.i1)+(this.j2.i1*matrix2.j1.i2)+(this.j3.i1*matrix2.j1.i3)),
@@ -100,10 +100,10 @@ class Matrix {
                     ((this.j1.i2*matrix2.j3.i1)+(this.j2.i2*matrix2.j3.i2)+(this.j3.i2*matrix2.j3.i3)),
                     ((this.j1.i3*matrix2.j3.i1)+(this.j2.i3*matrix2.j3.i2)+(this.j3.i3*matrix2.j3.i3))
                 )
-            )
+            );
     }
 
-    matrixDeterminant(){
+    matrixDeterminant(){ // Returns a constant defined by Sarrous method
         return (
             (this.j1.i1*this.j2.i2*this.j3.i3) +
             (this.j2.i1*this.j3.i2*this.j1.i3) +
@@ -114,7 +114,7 @@ class Matrix {
         );
     }
 
-    matrixTransposal(){
+    matrixTransposal(){ // Returns the transposal matrix object
         return new Matrix(
             new Vector(
                 this.j1.i1,

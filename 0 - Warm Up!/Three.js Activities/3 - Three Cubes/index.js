@@ -1,5 +1,5 @@
-const loader = new THREE.TextureLoader();
-loader.setPath('textures/');
+const loader = new THREE.TextureLoader(); // The texture loader for the cubes
+loader.setPath('textures/'); // Localizes the textures at this folder
 
 const renderLeftCube = () => {
 
@@ -10,10 +10,10 @@ const renderLeftCube = () => {
     renderer.setSize(480, 480);
     document.getElementById('leftCube').appendChild( renderer.domElement );
 
-    const leftCubeTexture = loader.load('leftCube.png');
+    const leftCubeTexture = loader.load('leftCube.png'); // then i set a texture to a file in the path folder
 
     const cubeGeometry = new THREE.BoxGeometry( 1, 1, 1 );
-    const cubeMaterial = new THREE.MeshBasicMaterial({map: leftCubeTexture});
+    const cubeMaterial = new THREE.MeshBasicMaterial({map: leftCubeTexture}); // and finally set the texture to the cube material
     const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 
     scene.add(cube);
@@ -37,9 +37,10 @@ const renderMiddleCube = () => {
     renderer.setSize(480, 480);
     document.getElementById('middleCube').appendChild( renderer.domElement );
 
-    const middleCubeTexture = loader.load('/middleCube.png');
+    const middleCubeTexture = loader.load('/middleCube.png'); // then i set a texture to a file in the path folder
+
     const cubeGeometry = new THREE.BoxGeometry( 1, 1, 1 );
-    const cubeMaterial = new THREE.MeshBasicMaterial({map: middleCubeTexture});
+    const cubeMaterial = new THREE.MeshBasicMaterial({map: middleCubeTexture}); // and finally set the texture to the cube material
 
     const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 
@@ -68,9 +69,10 @@ const renderRightCube = () => {
     renderer.setSize(480, 480);
     document.getElementById('rightCube').appendChild( renderer.domElement );
 
-    const rightCubeTexture = loader.load('/rightCube.png');
+    const rightCubeTexture = loader.load('/rightCube.png'); // then i set a texture to a file in the path folder
+
     const cubeGeometry = new THREE.BoxGeometry( 1, 1, 1 );
-    const cubeMaterial = new THREE.MeshBasicMaterial({map: rightCubeTexture});
+    const cubeMaterial = new THREE.MeshBasicMaterial({map: rightCubeTexture}); // and finally set the texture to the cube material
 
     const cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
 
@@ -87,6 +89,10 @@ const renderRightCube = () => {
     }
     rotate();
 }
+
+// The approach used in here was to create a function for each cube and then call the three functions
+// Each one is set at one HTML element
+// Each one uses a local texture wich is from the Silent Hill (PS1) game
 
 renderLeftCube();
 renderMiddleCube();

@@ -20,7 +20,7 @@ const quickSort = (array, beginning, end) => { // The array that should be reorg
     }
 }
 
-const partition = (array, beginning, end) => {
+const partition = (array, beginning, end) => { // The key to the algorithm: Partition, the function that reorganizes the subarray array[beginning...end];
 
     let aux = beginning - 1;
 
@@ -35,7 +35,7 @@ const partition = (array, beginning, end) => {
 }
 
 
-// change 
+// change the position betweeen two elements from the same array
 const swap = (array, i, j) => { 
     var aux = array[i];
     array[i] = array[j];

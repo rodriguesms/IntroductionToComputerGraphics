@@ -23,6 +23,8 @@ camera.position.z = 3;
 cube.rotation.z += 0.75;
 edge.rotation.z += 0.75;
 
+// The only difference in here is the rotate function wich basically changes the rotation attribute of the cube and edge elements
+// And then, refreshes the frame, creating an animation
 
 const rotate = () => {
 

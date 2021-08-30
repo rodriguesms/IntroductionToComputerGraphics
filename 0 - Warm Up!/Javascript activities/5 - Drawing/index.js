@@ -181,7 +181,9 @@ const drawOuterCurves = () => {
     outerCurves.stroke();
 }
 
-//Drawing element => Calling the specific functions for each part of the Seal
+// Drawing element => Calling the specific functions for each part of the Seal
+// The Seal has been divided into functions that represents fragments of his complete form
+ 
 drawOuterCircle();
 drawInnerCircle();
 drawMainTriangle();
