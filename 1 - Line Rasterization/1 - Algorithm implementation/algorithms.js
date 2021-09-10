@@ -23,10 +23,30 @@ let color_buffer = new Canvas("midpoint-canvas");
 color_buffer.clear();
 
 function MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1) {
-	// Escreva seu código aqui!
+
+  /*y0 = document.getElementById('midpoint-canvas').height - y0;
+  
+  y1 = document.getElementById('midpoint-canvas').height - y1;*/
+
+
+  y0 = document.getElementById('midpoint-canvas').height - y0;
+  y1 = document.getElementById('midpoint-canvas').height - y1;
+
+  if(x0 > x1 || y0 < y1){
+    let aux = x0;
+    x0 = x1;
+    x1 = aux;
+    aux = y0;
+    y0 = y1;
+    y1 = aux;
+  }
+
+  
+
+// Escreva seu código aqui!
   
   // Exemplo de código para acender pixels no canvas:
-  for (let y = y0; y < y1; ++y)
+  for (let y = y0; y > y1; --y)
     for (let x = x0; x < x1; ++x)
       color_buffer.putPixel(x, y, color_0); 
 
