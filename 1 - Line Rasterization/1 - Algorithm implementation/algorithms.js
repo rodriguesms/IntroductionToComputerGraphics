@@ -24,37 +24,32 @@ color_buffer.clear();
 
 function MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1) {
 
-  /*y0 = document.getElementById('midpoint-canvas').height - y0;
-  
-  y1 = document.getElementById('midpoint-canvas').height - y1;*/
+  var dx = Math.abs(x1 - x0);
+  var sx = (x0 < x1) ? 1 : -1;
+  var dy = -Math.abs(y1-y0);
+  var sy = (y0 < y1) ? 1: -1;
+  var err = dx + dy;
 
-
-  y0 = document.getElementById('midpoint-canvas').height - y0;
-  y1 = document.getElementById('midpoint-canvas').height - y1;
-
-  if(x0 > x1 || y0 < y1){
-    let aux = x0;
-    x0 = x1;
-    x1 = aux;
-    aux = y0;
-    y0 = y1;
-    y1 = aux;
+  while(1){
+    color_buffer.putPixel(x0, y0, color_0);
+    if(x0==x1 && y0==y1){
+      break;
+    }
+    var e2 = 2*err;
+    if(e2 >= dy){
+      err += dy;
+      x0 += sx;
+    }
+    if(e2 <= dx){
+      err += dx;
+      y0 += sy;
+    }
   }
-
-  
-
-// Escreva seu código aqui!
-  
-  // Exemplo de código para acender pixels no canvas:
-  for (let y = y0; y > y1; --y)
-    for (let x = x0; x < x1; ++x)
-      color_buffer.putPixel(x, y, color_0); 
-
 }
 
 function DrawTriangle(x0, y0, x1, y1, x2, y2, color_0, color_1, color_2) {
 	// Escreva seu código aqui!  
 }
 
-MidPointLineAlgorithm(20, 10, 80, 30, [255,255,0,255]);
+MidPointLineAlgorithm(300, 150, 20, 260, [255,255,0,255]);
 DrawTriangle();
