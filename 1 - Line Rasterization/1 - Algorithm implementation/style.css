@@ -80,13 +80,18 @@ nav a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 300px;
 }
 
 .triangle {
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-
+    width: 500px;
+    height: 300px;
 }
 
 .content h1 {
@@ -112,6 +117,8 @@ nav a {
 .content .tm {
     font-size: 14px;
 }
+
+
 
 canvas {
     margin-left: auto;
