@@ -1,22 +1,8 @@
-class Canvas {
-  constructor(canvas_id) {
-    this.canvas = document.getElementById(canvas_id);
-    this.context = this.canvas.getContext("2d");
-    this.clear_color = 'rgba(0,0,0,0)';
-  }
-
-  clear() {
-    this.context.fillStyle = this.clear_color;
-    this.context.fillRect(0, 0, this.canvas.width, this.canvas.height);
-  }
-
-  putPixel(x, y, color) {
-    this.context.fillStyle = 'rgb(' + color[0] + ',' + color[1] + ',' + color[2] + ')';
-    this.context.fillRect(x, (this.canvas.height - 1) - y, 1, 1);
-  }
-}
+import Canvas from '../module.js';
 
 function MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1, canvas_id="midpoint-canvas") {
+
+  console.log(x0, y0, x1, y1, color_0, color_1, canvas_id);
 
   let midpoint = new Canvas(canvas_id);
   midpoint.clear();
@@ -38,23 +24,29 @@ function MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1, canvas_id="midp
 
   var cont = 0;
 
+  // Initializing variables with default color values at starting point 
+  var r = color_0[0];
+  var g = color_0[1];
+  var b = color_0[2];
+  var a = color_0[3];
+
   while(1){
 
     color_0[0] > color_1[0] ?   
-      r = Math.abs(Math.floor(((color_0[0] - color_1[0])*(cont/lineSize) - color_0[0]))) : 
-      r = Math.abs(Math.floor(((color_0[0] - color_1[0])*(cont/lineSize) + color_0[0])));
+      r = Math.abs(Math.floor((dR*(cont/lineSize) - color_0[0]))) : 
+      r = Math.abs(Math.floor((dR*(cont/lineSize) + color_0[0])));
 
     color_0[1] > color_1[1] ?
-      g = Math.abs(Math.floor(((color_0[1] - color_1[1])*(cont/lineSize) - color_0[1]))) :
-      g = Math.abs(Math.floor(((color_0[1] - color_1[1])*(cont/lineSize) + color_0[1])));
+      g = Math.abs(Math.floor((dG*(cont/lineSize) - color_0[1]))) :
+      g = Math.abs(Math.floor((dG*(cont/lineSize) + color_0[1])));
 
     color_0[2] > color_1[2] ?
-      b = Math.abs(Math.floor(((color_0[2] - color_1[2])*(cont/lineSize) - color_0[2]))) :
-      b = Math.abs(Math.floor(((color_0[2] - color_1[2])*(cont/lineSize) + color_0[2])))
+      b = Math.abs(Math.floor((dB*(cont/lineSize) - color_0[2]))) :
+      b = Math.abs(Math.floor((dB*(cont/lineSize) + color_0[2])))
 
     color_0[3] > color_1[3] ?
-      a = Math.abs(Math.floor(((color_0[3] - color_1[3])*(cont/lineSize) - color_0[3]))) :
-      a = Math.abs(Math.floor(((color_0[3] - color_1[3])*(cont/lineSize) + color_0[3])))
+      a = Math.abs(Math.floor((dA*(cont/lineSize) - color_0[3]))) :
+      a = Math.abs(Math.floor((dA*(cont/lineSize) + color_0[3])))
 
     console.log(r, g, b, a)
 
@@ -92,3 +84,5 @@ function DrawTriangle(x0, y0, x1, y1, x2, y2, color_0, color_1, color_2) {
 
 MidPointLineAlgorithm(25, 30, 100, 80, [255,0,0,255], [255,255,0,255]);
 DrawTriangle(25, 30, 50, 100, 100, 15, [255,0,0,255], [0,0,255,255], [0,255,0,255]);
+
+export { MidPointLineAlgorithm, DrawTriangle }
