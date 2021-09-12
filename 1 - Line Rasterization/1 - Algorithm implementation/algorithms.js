@@ -30,28 +30,21 @@ function MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1, canvas_id="midp
   var b = color_0[2];
   var a = color_0[3];
 
-  while(1){
+  let isBigger = []; 
 
-    color_0[0] > color_1[0] ?   
-      r = Math.abs(Math.floor((dR*(cont/lineSize) - color_0[0]))) : 
-      r = Math.abs(Math.floor((dR*(cont/lineSize) + color_0[0])));
-
-    color_0[1] > color_1[1] ?
-      g = Math.abs(Math.floor((dG*(cont/lineSize) - color_0[1]))) :
-      g = Math.abs(Math.floor((dG*(cont/lineSize) + color_0[1])));
-
-    color_0[2] > color_1[2] ?
-      b = Math.abs(Math.floor((dB*(cont/lineSize) - color_0[2]))) :
-      b = Math.abs(Math.floor((dB*(cont/lineSize) + color_0[2])))
-
-    color_0[3] > color_1[3] ?
-      a = Math.abs(Math.floor((dA*(cont/lineSize) - color_0[3]))) :
-      a = Math.abs(Math.floor((dA*(cont/lineSize) + color_0[3])))
-
-    console.log(r, g, b, a)
+  isBigger[0] = (color_0[0] > color_1[0]) ? -1 : 1; 
+  isBigger[1] = (color_0[1] > color_1[1]) ? -1 : 1; 
+  isBigger[2] = (color_0[2] > color_1[2]) ? -1 : 1; 
+  isBigger[3] = (color_0[3] > color_1[3]) ? -1 : 1; 
+ 
+  while(1){ 
+  
+    r = Math.abs(Math.floor((dR*(cont/lineSize) + isBigger[0] * color_0[0]))); 
+    g = Math.abs(Math.floor((dG*(cont/lineSize) + isBigger[1] * color_0[1]))); 
+    b = Math.abs(Math.floor((dB*(cont/lineSize) + isBigger[2] * color_0[2]))); 
+    a = Math.abs(Math.floor((dA*(cont/lineSize) + isBigger[3] * color_0[3])));
 
     var pointColor = [r, g, b, a];
-
 
     midpoint.putPixel(x0, y0, pointColor);
 
