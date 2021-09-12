@@ -66,27 +66,264 @@ function MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1, canvas_id="midp
 	}
 }
 
-const Chara = () => {
+function DrawTriangle(x0, y0, x1, y1, x2, y2, color_0, color_1, color_2, canvas_id) {
+
+  MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1, canvas_id);
+  MidPointLineAlgorithm(x1, y1, x2, y2, color_1, color_2, canvas_id);
+  MidPointLineAlgorithm(x2, y2, x0, y0, color_2, color_0, canvas_id);
+
+}
+
+
+const drawHair = () => {
+
+
+
+
 	//rgb(141, 79, 44) hair
 	//rgb(247, 204, 43) skin
 	//HAIR
-	MidPointLineAlgorithm(50, 50, 50, 80, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
-	MidPointLineAlgorithm(50, 50, 55, 50, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
-	MidPointLineAlgorithm(55, 50, 55, 45, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
-	MidPointLineAlgorithm(55, 45, 60, 45, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
-	MidPointLineAlgorithm(60, 45, 60, 50, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
-	MidPointLineAlgorithm(60, 50, 65, 50, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
-	MidPointLineAlgorithm(65, 50, 65, 45, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
-	MidPointLineAlgorithm(65, 45, 95, 45, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+/*	MidPointLineAlgorithm(50, 110, 50, 140, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(50, 110, 55, 110, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(55, 110, 55, 105, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(55, 105, 60, 105, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(60, 105, 60, 110, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(60, 110, 65, 110, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(65, 110, 65, 105, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(65, 105, 95, 105, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(50, 140, 55, 140, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(55, 140, 55, 155, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(55, 155, 60, 155, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(60, 155, 60, 165, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(60, 165, 65, 165, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(65, 165, 65, 170, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(65, 170, 70, 170, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(70, 170, 70, 175, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(70, 175, 75, 175, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(75, 175, 75, 180, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(75, 180, 120, 180, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(120, 180, 120, 175, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(120, 175, 125, 175, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(125, 175, 125, 170, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(125, 170, 130, 170, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(130, 170, 130, 165, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(130, 165, 135, 165, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(135, 165, 135, 160, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(135, 160, 140, 160, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(140, 160, 140, 145, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(140, 145, 145, 145, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(145, 145, 145, 110, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(145, 110, 140, 110, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(140, 110, 140, 105, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(140, 105, 135, 105, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(135, 105, 135, 110, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(135, 110, 130, 110, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(130, 110, 130, 100, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(130, 100, 125, 100, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(125, 100, 125, 105, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');
+	MidPointLineAlgorithm(125, 105, 105, 105, [141, 79, 44, 255], [141, 79, 44, 255], 'chara');*/
 
-	//FACE
-	MidPointLineAlgorithm(95, 40, 95, 50, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
-	MidPointLineAlgorithm(95, 50, 80, 50, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
-	MidPointLineAlgorithm(80, 50, 80, 55, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
-	MidPointLineAlgorithm(80, 55, 70, 55, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
-	MidPointLineAlgorithm(70, 55, 70, 60, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
-	MidPointLineAlgorithm(70, 60, 65, 60, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
-	MidPointLineAlgorithm(65, 60, 65, 70, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+
 
 }
-Chara()
+
+const drawFace = () => {
+	/*MidPointLineAlgorithm(95, 100, 95, 110, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(95, 110, 80, 110, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(80, 110, 80, 115, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(80, 115, 70, 115, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(70, 115, 70, 120, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(70, 120, 65, 120, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(65, 120, 65, 130, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(65, 130, 70, 130, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(70, 130, 70, 150, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(70, 150, 75, 150, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(75, 150, 75, 155, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(75, 155, 80, 155, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(80, 155, 80, 150, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(80, 150, 85, 150, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	
+	MidPointLineAlgorithm(85, 150, 85, 145, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(85, 145, 95, 145, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(95, 145, 95, 150, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(95, 150, 100, 150, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(100, 150, 100, 155, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(100, 155, 105, 155, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(105, 155, 105, 145, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(105, 145, 115, 145, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(115, 145, 115, 150, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(115, 150, 120, 150, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(120, 150, 120, 145, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(120, 145, 125, 145, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(125, 145, 125, 135, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(125, 135, 130, 135, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(130, 135, 130, 140, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(130, 140, 135, 140, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(135, 140, 135, 130, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(135, 130, 130, 130, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(130, 130, 130, 125, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(130, 125, 125, 125, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(125, 125, 125, 120, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(125, 120, 120, 120, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(115, 120, 115, 115, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(120, 120, 115, 120, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(115, 120, 115, 115, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(115, 115, 110, 115, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(110, 115, 110, 110, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(110, 110, 105, 110, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(105, 110, 105, 100, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+	MidPointLineAlgorithm(105, 100, 95, 100, [247, 204, 43, 255], [247, 204, 43, 255], 'chara');
+*/
+}
+
+const limits = () => {
+
+	MidPointLineAlgorithm(50, 50, 250, 50, [255, 255, 255, 255], [255, 255, 255, 255], 'draw');
+	MidPointLineAlgorithm(50, 50, 50, 250, [255, 255, 255, 255], [255, 255, 255, 255], 'draw');
+	MidPointLineAlgorithm(50, 250, 250, 250, [255, 255, 255, 255], [255, 255, 255, 255], 'draw');
+	MidPointLineAlgorithm(250, 250, 250, 50, [255, 255, 255, 255], [255, 255, 255, 255], 'draw');
+}
+
+const butterfly = () => {
+
+	//DrawTriangle(35, 85, 85, 200, 69, 105, [255, 255, 255, 255], [200, 200, 200, 255], [150, 150, 150, 255], 'draw');
+	//DrawTriangle(35, 85, 69, 105, 150, 55, [255, 255, 255, 255], [200, 200, 200, 255], [150, 150, 150, 255], 'draw');
+
+	DrawTriangle(75, 125, 95, 170, 87, 130, [255, 255, 255, 255], [200, 200, 200, 255], [150, 150, 150, 255], 'butterfly');	
+	DrawTriangle(75, 125, 87, 130, 120, 110, [255, 255, 255, 255], [200, 200, 200, 255], [150, 150, 150, 255], 'butterfly');	
+	MidPointLineAlgorithm(120, 110, 85, 90, [255, 255, 255, 255], [150, 150, 150, 255], 'butterfly');
+	MidPointLineAlgorithm(85, 90, 95, 65, [255, 255, 255, 255], [150, 150, 150, 255], 'butterfly');
+	MidPointLineAlgorithm(130, 110, 95, 170, [255, 255, 255, 255], [150, 150, 150, 255], 'butterfly');
+	
+	DrawTriangle(95, 65, 130, 110, 115, 75, [255, 255, 255, 255], [200, 200, 200, 255], [150, 150, 150, 255], 'butterfly');	
+
+	MidPointLineAlgorithm(136, 115, 118, 145, [255, 255, 255, 255], [150, 150, 150, 255], 'butterfly');
+	MidPointLineAlgorithm(136, 115, 154, 145, [255, 255, 255, 255], [150, 150, 150, 255], 'butterfly');
+
+	MidPointLineAlgorithm(142, 110, 180, 170, [255, 255, 255, 255], [150, 150, 150, 255], 'butterfly');
+	DrawTriangle(142, 110, 175, 65, 154, 75, [255, 255, 255, 255], [200, 200, 200, 255], [150, 150, 150, 255], 'butterfly');
+	MidPointLineAlgorithm(175, 65, 190, 90, [255, 255, 255, 255], [150, 150, 150, 255], 'butterfly');
+	MidPointLineAlgorithm(190, 90, 152, 110, [255, 255, 255, 255], [150, 150, 150, 255], 'butterfly');
+	DrawTriangle(152, 110, 195, 125, 185, 135, [255, 255, 255, 255], [200, 200, 200, 255], [150, 150, 150, 255], 'butterfly');
+	DrawTriangle(195, 125, 180, 170, 185, 135, [255, 255, 255, 255], [200, 200, 200, 255], [150, 150, 150, 255], 'butterfly');
+
+}
+
+butterfly();
+
+const cloak = () => {
+
+	//rgb(145, 1, 55)
+	//rgb(204, 35, 42)
+
+	MidPointLineAlgorithm(90, 95, 60, 80, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(90, 95, 110, 100, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(115, 96, 95, 110, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(95, 110, 105, 125, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(105, 125, 110, 155, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(110, 155, 108, 170, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(108, 170, 112, 190, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(112, 190, 120, 200, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(120, 200, 140, 208, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(140, 208, 160, 205, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(160, 205, 180, 200, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(180, 200, 185, 190, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(185, 190, 190, 170, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(185, 190, 190, 170, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(190, 170, 192, 140, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(192, 140, 200, 115, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(200, 115, 180, 95, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(190, 105, 210, 95, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(210, 95, 225, 85, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+
+
+	MidPointLineAlgorithm(125, 95, 115, 130, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(115, 130, 135, 185, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(135, 185, 175, 160, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(175, 160, 185, 120, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(175, 160, 185, 120, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+	MidPointLineAlgorithm(185, 120, 165, 90, [255, 255, 255, 255], [150, 150, 150, 255], 'draw');
+
+	
+}
+
+const face = () => {
+
+	MidPointLineAlgorithm(130, 152, 145, 153, [139, 0, 0, 50], [139, 0, 0, 50], 'draw');
+	MidPointLineAlgorithm(133, 158, 145, 143, [244, 0, 42, 255], [255, 17, 0, 255], 'draw');
+	MidPointLineAlgorithm(145, 160, 130, 145, [244, 0, 42, 255], [255, 17, 0, 255], 'draw');
+	MidPointLineAlgorithm(145, 160, 130, 145, [161, 40, 48, 255], [161, 40, 48, 255], 'draw');
+
+	MidPointLineAlgorithm(160, 153, 174, 153, [139, 0, 0, 50], [139, 0, 0, 50], 'draw');
+	MidPointLineAlgorithm(160, 160, 175, 145, [244, 0, 42, 255], [255, 17, 0, 255], 'draw');
+	MidPointLineAlgorithm(172, 158, 160, 141, [244, 0, 42, 255], [255, 17, 0, 255], 'draw');
+	MidPointLineAlgorithm(145, 160, 130, 145, [161, 40, 48, 255], [161, 40, 48, 255], 'draw');
+
+
+	// [255, 215, 0, 255]
+	// [255, 99, 71, 255]
+
+	MidPointLineAlgorithm(125, 130, 130, 125, [255, 99, 71, 255], [255, 99, 71, 255], 'draw');
+	MidPointLineAlgorithm(130, 125, 140, 120, [255, 99, 71, 255], [255, 215, 0, 255], 'draw');
+	MidPointLineAlgorithm(140, 120, 155, 120, [255, 215, 0, 255], [255, 215, 0, 255], 'draw');
+	MidPointLineAlgorithm(155, 120, 165, 125, [255, 215, 0, 255], [255, 99, 71, 255], 'draw');
+	MidPointLineAlgorithm(165, 125, 170, 130, [255, 99, 71, 255], [255, 99, 71, 255], 'draw');
+
+	MidPointLineAlgorithm(125, 130, 130, 115, [255, 99, 71, 255], [255, 99, 71, 255], 'draw');
+	MidPointLineAlgorithm(130, 115, 140, 110, [255, 99, 71, 255], [255, 215, 0, 255], 'draw');
+	MidPointLineAlgorithm(130, 115, 140, 110, [255, 99, 71, 255], [255, 215, 0, 255], 'draw');
+
+	MidPointLineAlgorithm(150, 110, 155, 110, [255, 99, 71, 255], [255, 215, 0, 255], 'draw');
+	MidPointLineAlgorithm(155, 110, 165, 115, [255, 99, 71, 255], [255, 215, 0, 255], 'draw');
+
+	MidPointLineAlgorithm(155, 110, 165, 115, [255, 99, 71, 255], [255, 215, 0, 255], 'draw');
+	MidPointLineAlgorithm(165, 115, 170, 130, [255, 99, 71, 255], [255, 215, 0, 255], 'draw');
+
+	MidPointLineAlgorithm(165, 130, 170, 115, [255, 99, 71, 255], [255, 215, 0, 255], 'draw');
+	MidPointLineAlgorithm(169, 132, 160, 110, [255, 99, 71, 255], [255, 215, 0, 255], 'draw');
+	MidPointLineAlgorithm(155, 125, 155, 108, [255, 99, 71, 255], [255, 215, 0, 255], 'draw');
+	MidPointLineAlgorithm(150, 125, 150, 108, [255, 99, 71, 255], [255, 215, 0, 255], 'draw');
+	MidPointLineAlgorithm(145, 125, 140, 108, [255, 99, 71, 255], [255, 215, 0, 255], 'draw');
+	MidPointLineAlgorithm(135, 125, 140, 108, [255, 99, 71, 255], [255, 215, 0, 255], 'draw');
+	MidPointLineAlgorithm(130, 130, 136, 108, [255, 99, 71, 255], [255, 215, 0, 255], 'draw');
+	MidPointLineAlgorithm(128, 130, 130, 108, [255, 99, 71, 255], [255, 215, 0, 255], 'draw');
+
+	
+
+}
+
+const hand = () => {
+
+	// [255, 165, 0, 255]
+	// [255, 69, 0, 255]
+
+	MidPointLineAlgorithm(150, 72, 142, 110, [255, 165, 0, 255], [255, 69, 0, 255], 'draw');
+	MidPointLineAlgorithm(142, 110, 142, 115, [255, 69, 0, 255], [255, 69, 0, 255], 'draw');
+	MidPointLineAlgorithm(142, 115, 147, 115, [255, 69, 0, 255], [255, 69, 0, 255], 'draw');
+	MidPointLineAlgorithm(147, 115, 160, 72, [255, 69, 0, 255], [255, 165, 0, 255], 'draw');
+
+	MidPointLineAlgorithm(120, 80, 125, 75, [255, 165, 0, 255], [255, 69, 0, 255], 'draw');
+	MidPointLineAlgorithm(120, 80, 125, 85, [255, 69, 0, 255], [255, 69, 0, 255], 'draw');
+	MidPointLineAlgorithm(125, 85, 130, 80, [255, 69, 0, 255], [255, 165, 0, 255], 'draw');
+
+	MidPointLineAlgorithm(152, 72, 130, 80, [255, 165, 0, 255],[255, 165, 0, 255], 'draw');
+	MidPointLineAlgorithm(130, 80, 115, 65, [255, 165, 0, 255], [255, 69, 0, 255], 'draw');
+	MidPointLineAlgorithm(115, 65, 130, 35, [255, 69, 0, 255], [255, 69, 0, 255], 'draw');
+	MidPointLineAlgorithm(130, 35, 145, 45, [255, 69, 0, 255], [255, 165, 0, 255], 'draw');
+	MidPointLineAlgorithm(145, 45, 155, 35, [255, 165, 0, 255], [255, 165, 0, 255], 'draw');
+	MidPointLineAlgorithm(155, 35, 165, 35, [255, 165, 0, 255], [255, 165, 0, 255], 'draw');
+	MidPointLineAlgorithm(165, 35, 175, 20, [255, 165, 0, 255], [255, 69, 0, 255], 'draw');
+	MidPointLineAlgorithm(175, 20, 190, 30, [255, 69, 0, 255], [255, 69, 0, 255], 'draw');
+	MidPointLineAlgorithm(190, 30, 185, 55, [255, 69, 0, 255], [255, 69, 0, 255], 'draw');
+	MidPointLineAlgorithm(185, 55, 160, 72, [255, 69, 0, 255], [255, 165, 0, 255], 'draw');
+
+
+}
+
+
+drawHair();
+drawFace();
+//limits();
+cloak();
+face();
+hand();
