@@ -11,9 +11,11 @@ class Canvas {
 	}
 
 	putPixel(x, y, color) {
-		this.context.fillStyle = 'rgb(' + color[0] + ',' + color[1] + ',' + color[2] + ')';
+		this.context.fillStyle = 'rgba(' + color[0] + ',' + color[1] + ',' + color[2] + ',' + color[3]/255 + ')'; // Considerando RGBA, ao invés de RGB => Note que o valor de A, varia de 0 a 1
 		this.context.fillRect(x, (this.canvas.height - 1) - y, 1, 1);
 	}
 }
+
+// MAIN CLASS
 
 export default Canvas;

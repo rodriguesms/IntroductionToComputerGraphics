@@ -76,14 +76,6 @@ function DrawTriangle(x0, y0, x1, y1, x2, y2, color_0, color_1, color_2, canvas_
 }
 
 
-const limits = () => {
-
-	MidPointLineAlgorithm(50, 50, 250, 50, [255, 255, 255, 255], [255, 255, 255, 255], 'draw');
-	MidPointLineAlgorithm(50, 50, 50, 250, [255, 255, 255, 255], [255, 255, 255, 255], 'draw');
-	MidPointLineAlgorithm(50, 250, 250, 250, [255, 255, 255, 255], [255, 255, 255, 255], 'draw');
-	MidPointLineAlgorithm(250, 250, 250, 50, [255, 255, 255, 255], [255, 255, 255, 255], 'draw');
-}
-
 const butterfly = () => {
 
 	DrawTriangle(75, 125, 95, 170, 87, 130, [255, 255, 255, 255], [200, 200, 200, 255], [150, 150, 150, 255], 'butterfly');	
@@ -200,9 +192,7 @@ const hand = () => {
 	MidPointLineAlgorithm(190, 30, 185, 55, [255, 69, 0, 255], [255, 69, 0, 255], 'draw');
 	MidPointLineAlgorithm(185, 55, 160, 72, [255, 69, 0, 255], [255, 165, 0, 255], 'draw');
 
-
 }
-
 
 butterfly();
 

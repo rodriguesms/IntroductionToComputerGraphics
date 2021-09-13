@@ -2,15 +2,15 @@ import Canvas from '../module.js';
 
 function MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1, canvas_id="midpoint-canvas") {
 
-  console.log(x0, y0, x1, y1, color_0, color_1, canvas_id);
-
   let midpoint = new Canvas(canvas_id);
   midpoint.clear();
 
-  var dx = Math.abs(x1 - x0);
+  var dx = Math.abs(x1 - x0); //
   var sx = (x0 < x1) ? 1 : -1;
+
   var dy = -Math.abs(y1-y0);
   var sy = (y0 < y1) ? 1: -1;
+  
   var err = dx + dy;
 
   const dR = Math.abs(color_0[0] - color_1[0]);
@@ -44,6 +44,7 @@ function MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1, canvas_id="midp
     b = Math.abs(Math.floor((dB*(cont/lineSize) + isBigger[2] * color_0[2]))); 
     a = Math.abs(Math.floor((dA*(cont/lineSize) + isBigger[3] * color_0[3])));
 
+    console.log(r, g, b, a)
     var pointColor = [r, g, b, a];
 
     midpoint.putPixel(x0, y0, pointColor);
