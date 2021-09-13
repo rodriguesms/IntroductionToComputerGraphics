@@ -54,12 +54,12 @@ function MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1, canvas_id="midp
     
     cont++;
 
-    var e2 = 2*err;
-    if(e2 >= dy){
+    var e2 = 2*err;//O uso de e2 permite com que os cálculos realizados sejam puramente entre números inteiros
+    if(e2 >= dy){//e_xy + e_x > 0 => modificação na coordenada x do próximo pixel a ser rasterizado
       err += dy;
       x0 += sx;
     }
-    if(e2 <= dx){
+    if(e2 <= dx){//e_xy + e_y < 0 => modificação na coordenada y do próximo pixel a ser rasterizado
       err += dx;
       y0 += sy;
     }
