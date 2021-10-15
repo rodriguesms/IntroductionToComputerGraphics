@@ -46,9 +46,9 @@ const rotation_angle_z = 0.0;
 const x_axis_translation = 0.0;
 const y_axis_translation = 0.0;
 const z_axis_translation = 0.0;
-const x_axis_sheer = 0.0;
-const y_axis_sheer = 0.0;
-const z_axis_sheer = 0.0;
+const x_axis_sheer = 1.0;
+const y_axis_sheer = 1.0;
+const z_axis_sheer = 1.0;
 
 let m_model_translation = new THREE.Matrix4();
 let m_model_sheer = new THREE.Matrix4();
@@ -63,7 +63,7 @@ m_model_translation.set(1.0, 0.0, 0.0, x_axis_translation,
 
 m_model_rotation_x.set(1.0, 0.0, 0.0, 0.0,
                       0.0, Math.cos(rotation_angle_x), -Math.sin(rotation_angle_x), 0.0,
-                      0.0, Math,sin(rotation_angle_x), Math.cos(rotation_angle_x), 0.0,
+                      0.0, Math.sin(rotation_angle_x), Math.cos(rotation_angle_x), 0.0,
                       0.0, 0.0, 0.0, 1.0);
 
 m_model_rotation_y.set(Math.cos(rotation_angle_y), 0.0, Math.sin(rotation_angle_y), 0.0,
@@ -89,6 +89,8 @@ m_model.set(1.0, 0.0, 0.0, 0.0,
           0.0, 0.0, 0.0, 1.0);
 
 m_model.multiply(m_model_translation).multiply(m_model_rotation_x).multiply(m_model_rotation_y).multiply(m_model_rotation_z).multiply(m_model_sheer);
+
+console.log(m_model);
 
 for (let i = 0; i < 8; ++i)
   vertices[i].applyMatrix4(m_model);
@@ -162,7 +164,9 @@ for (let i = 0; i < 8; ++i)
  * Homogeneizacao (divisao por W): Esp. Recorte --> Esp. Canônico
  *****************************************************************************/
 
-// ---------- implementar aqui ----------------------------------------------
+vertices.forEach(element => {
+  element.divideScalar(element.w);
+});
 
 /******************************************************************************
  * Matriz Viewport: Esp. Canônico --> Esp. Tela
@@ -190,8 +194,17 @@ for (let i = 0; i < 8; ++i)
  * Rasterização
  *****************************************************************************/
 
+edges.forEach(element => {
+  MidPointLineAlgorithm(Math.round(vertices[element[0]].x), Math.round(vertices[element[0]].y), 
+                        Math.round(vertices[element[1]].x), Math.round(vertices[element[1]].y), 
+                        [255, 0, 0, 255], [255, 0, 0, 255], "canvas");
+  console.log(Math.round(vertices[element[0]].x), Math.round(vertices[element[0]].y), Math.round(vertices[element[0]].z))
+  console.log(Math.round(vertices[element[1]].x), Math.round(vertices[element[1]].y), Math.round(vertices[element[1]].z))
+
+});
+
 // ---------- implementar aqui ----------------------------------------------
 
-MidPointLineAlgorithm(0, 0, 128, 128, [255, 0, 0, 255], [0, 255, 0, 255], "canvas");
+//MidPointLineAlgorithm(0, 0, 128, 128, [255, 0, 0, 255], [0, 255, 0, 255], "canvas");
 
 //  color_buffer.putPixel(vertices[6].x, vertices[6].y, [255,0,0]);
