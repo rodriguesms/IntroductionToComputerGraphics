@@ -79,14 +79,10 @@ let cam_up = new THREE.Vector3(0.0,1.0,0.0);      // vetor Up da câmera.
 
   let m_bt = new THREE.Matrix4();
 
-  
-
-  m_bt.set(1.0, 0.0, 0.0, 0.0,
-           0.0, 1.0, 0.0, 0.0,
-           0.0, 0.0, 1.0, 0.0,
+  m_bt.set(Xcam.x, Xcam.y, Xcam.z, 0.0,
+           Ycam.x, Ycam.y, Ycam.z, 0.0,
+           Zcam.x, Zcam.y, Zcam.z, 0.0,
            0.0, 0.0, 0.0, 1.0);
-
-  console.log(m_bt);
 
   // Construir a matriz 'm_t' de translação para tratar os casos em que as
   // origens do espaço do universo e da câmera não coincidem.
@@ -94,9 +90,11 @@ let cam_up = new THREE.Vector3(0.0,1.0,0.0);      // vetor Up da câmera.
   // ---------- implementar aqui ----------------------------------------------
   let m_t = new THREE.Matrix4();
 
-  m_t.set(1.0, 0.0, 0.0, 0.0,
-          0.0, 1.0, 0.0, 0.0,
-          0.0, 0.0, 1.0, 0.0,
+  let trans_vec = cam_pos;
+
+  m_t.set(1.0, 0.0, 0.0, -trans_vec.x,
+          0.0, 1.0, 0.0, -trans_vec.y,
+          0.0, 0.0, 1.0, -trans_vec.z,
           0.0, 0.0, 0.0, 1.0);
 
   // Constrói a matriz de visualização 'm_view' como o produto
