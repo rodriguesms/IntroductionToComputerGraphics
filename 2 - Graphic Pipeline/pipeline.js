@@ -65,15 +65,28 @@ let cam_up = new THREE.Vector3(0.0,1.0,0.0);      // vetor Up da câmera.
 
   // ---------- implementar aqui ----------------------------------------------
 
+  let cam_dir = new THREE.Vector3().subVectors(cam_look_at, cam_pos); // direction = look at - position
+
+  let Zcam = cam_dir.normalize().multiplyScalar(-1);
+
+  let Xcam = new THREE.Vector3().crossVectors(cam_up, Zcam).normalize();
+
+  let Ycam = new THREE.Vector3().crossVectors(Zcam, Xcam).normalize();
+
   // Construir 'm_bt', a inversa da matriz de base da câmera.
 
   // ---------- implementar aqui ----------------------------------------------
+
   let m_bt = new THREE.Matrix4();
+
+  
 
   m_bt.set(1.0, 0.0, 0.0, 0.0,
            0.0, 1.0, 0.0, 0.0,
            0.0, 0.0, 1.0, 0.0,
            0.0, 0.0, 0.0, 1.0);
+
+  console.log(m_bt);
 
   // Construir a matriz 'm_t' de translação para tratar os casos em que as
   // origens do espaço do universo e da câmera não coincidem.
