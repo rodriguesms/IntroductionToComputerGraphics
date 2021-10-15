@@ -63,8 +63,6 @@ let cam_up = new THREE.Vector3(0.0,1.0,0.0);      // vetor Up da câmera.
 
   // Derivar os vetores da base da câmera a partir dos parâmetros informados acima.
 
-  // ---------- implementar aqui ----------------------------------------------
-
   let cam_dir = new THREE.Vector3().subVectors(cam_look_at, cam_pos); // direction = look at - position
 
   let Zcam = cam_dir.normalize().multiplyScalar(-1);
@@ -74,8 +72,6 @@ let cam_up = new THREE.Vector3(0.0,1.0,0.0);      // vetor Up da câmera.
   let Ycam = new THREE.Vector3().crossVectors(Zcam, Xcam).normalize();
 
   // Construir 'm_bt', a inversa da matriz de base da câmera.
-
-  // ---------- implementar aqui ----------------------------------------------
 
   let m_bt = new THREE.Matrix4();
 
@@ -87,7 +83,6 @@ let cam_up = new THREE.Vector3(0.0,1.0,0.0);      // vetor Up da câmera.
   // Construir a matriz 'm_t' de translação para tratar os casos em que as
   // origens do espaço do universo e da câmera não coincidem.
 
-  // ---------- implementar aqui ----------------------------------------------
   let m_t = new THREE.Matrix4();
 
   let trans_vec = cam_pos;
@@ -109,7 +104,6 @@ let cam_up = new THREE.Vector3(0.0,1.0,0.0);      // vetor Up da câmera.
  * OBS: A matriz está carregada inicialmente com a identidade. 
  *****************************************************************************/
 
-  // ---------- implementar aqui ----------------------------------------------
   let m_projection = new THREE.Matrix4();
   const distance = 1;
   m_projection.set(1.0, 0.0, 0.0, 0.0,
@@ -131,7 +125,6 @@ let cam_up = new THREE.Vector3(0.0,1.0,0.0);      // vetor Up da câmera.
  * OBS: A matriz está carregada inicialmente com a identidade. 
  *****************************************************************************/
 
-  // ---------- implementar aqui ----------------------------------------------
   const x_dimension = 128.0;
   const y_dimension =128.0;
   let m_scale = new THREE.Matrix4();
