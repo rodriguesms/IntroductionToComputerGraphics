@@ -111,11 +111,11 @@ let cam_up = new THREE.Vector3(0.0,1.0,0.0);      // vetor Up da câmera.
 
   // ---------- implementar aqui ----------------------------------------------
   let m_projection = new THREE.Matrix4();
-
+  const distance = 1;
   m_projection.set(1.0, 0.0, 0.0, 0.0,
                    0.0, 1.0, 0.0, 0.0,
-                   0.0, 0.0, 1.0, 0.0,
-                   0.0, 0.0, 0.0, 1.0);
+                   0.0, 0.0, 1.0, distance,
+                   0.0, 0.0, -(1/distance), 0.0);
 
   for (let i = 0; i < 8; ++i)
     vertices[i].applyMatrix4(m_projection);
@@ -132,12 +132,19 @@ let cam_up = new THREE.Vector3(0.0,1.0,0.0);      // vetor Up da câmera.
  *****************************************************************************/
 
   // ---------- implementar aqui ----------------------------------------------
-  let m_viewport = new THREE.Matrix4();
-
-  m_viewport.set(1.0, 0.0, 0.0, 0.0,
-                 0.0, 1.0, 0.0, 0.0,
-                 0.0, 0.0, 1.0, 0.0,
-                 0.0, 0.0, 0.0, 1.0);
+  const x_dimension = 128.0;
+  const y_dimension =128.0;
+  let m_scale = new THREE.Matrix4();
+  let m_translation = new THREE.Matrix4();
+  m_scale.set(Math.round(x_dimension/2), 0.0, 0.0, 0.0,
+              0.0,Math.round(y_dimension/2), 0.0, 0.0,
+              0.0, 0.0, 1.0, 0.0,
+              0.0, 0.0, 0.0, 1.0);
+  m_translation.set(1.0, 0.0, 0.0, 1.0,
+                    0.0, 1.0, 0.0, 1.0,
+                    0.0, 0.0, 1.0, 0.0,
+                    0.0, 0.0, 0.0, 1.0);
+  let m_viewport = new THREE.Matrix4().multiplyMatrices(m_scale, m_translation);
 
   for (let i = 0; i < 8; ++i)
     vertices[i].applyMatrix4(m_viewport);
