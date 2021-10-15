@@ -24,28 +24,71 @@ let vertices = [new THREE.Vector4(-1.0, -1.0, -1.0, 1.0),
  * As 12 arestas do cubo, indicadas através dos índices dos seus vértices.
  *****************************************************************************/
 let edges = [[0,1],
-            [1,2],
-            [2,3],
-            [3,0],
-            [4,5],
-            [5,6],
-            [6,7],
-            [7,4],
-            [0,4],
-            [1,5],
-            [2,6],
-            [3,7]];
+          [1,2],
+          [2,3],
+          [3,0],
+          [4,5],
+          [5,6],
+          [6,7],
+          [7,4],
+          [0,4],
+          [1,5],
+          [2,6],
+          [3,7]];
 
 /******************************************************************************
  * Matriz Model (modelagem): Esp. Objeto --> Esp. Universo. 
  * OBS: A matriz está carregada inicialmente com a identidade.
  *****************************************************************************/
+const rotation_angle_x = 0.0;
+const rotation_angle_y = 0.0;
+const rotation_angle_z = 0.0;
+const x_axis_translation = 0.0;
+const y_axis_translation = 0.0;
+const z_axis_translation = 0.0;
+const x_axis_sheer = 0.0;
+const y_axis_sheer = 0.0;
+const z_axis_sheer = 0.0;
+
+let m_model_translation = new THREE.Matrix4();
+let m_model_sheer = new THREE.Matrix4();
+let m_model_rotation_x = new THREE.Matrix4();
+let m_model_rotation_y = new THREE.Matrix4();
+let m_model_rotation_z = new THREE.Matrix4();
+
+m_model_translation.set(1.0, 0.0, 0.0, x_axis_translation,
+                      0.0, 1.0, 0.0, y_axis_translation,
+                      0.0, 0.0, 1.0, z_axis_translation,
+                      0.0, 0.0, 0.0, 1.0);
+
+m_model_rotation_x.set(1.0, 0.0, 0.0, 0.0,
+                      0.0, Math.cos(rotation_angle_x), -Math.sin(rotation_angle_x), 0.0,
+                      0.0, Math,sin(rotation_angle_x), Math.cos(rotation_angle_x), 0.0,
+                      0.0, 0.0, 0.0, 1.0);
+
+m_model_rotation_y.set(Math.cos(rotation_angle_y), 0.0, Math.sin(rotation_angle_y), 0.0,
+                      0.0, 1.0, 0.0, 0.0,
+                      -Math.sin(rotation_angle_y), 0.0, Math.cos(rotation_angle_y), 0.0,
+                      0.0, 0.0, 0.0, 1.0);
+                      
+m_model_rotation_z.set(Math.cos(rotation_angle_z), -Math.sin(rotation_angle_z), 0.0, 0.0,
+                      Math.sin(rotation_angle_z), Math.cos(rotation_angle_z), 0.0, 0.0,
+                      0.0, 0.0, 1.0, 0.0,
+                      0.0, 0.0, 0.0, 1.0);
+                      
+m_model_sheer.set(x_axis_sheer, 0.0, 0.0, 0.0,
+                0.0, y_axis_sheer, 0.0, 0.0,
+                0.0, 0.0, z_axis_sheer, 0.0,
+                0.0, 0.0, 0.0, 1.0);
+
 let m_model = new THREE.Matrix4();
 
 m_model.set(1.0, 0.0, 0.0, 0.0,
           0.0, 1.0, 0.0, 0.0,
           0.0, 0.0, 1.0, 0.0,
           0.0, 0.0, 0.0, 1.0);
+
+m_model.multiply(m_model_translation).multiply(m_model_rotation_x).multiply(m_model_rotation_y).multiply(m_model_rotation_z).multiply(m_model_sheer);
 
 for (let i = 0; i < 8; ++i)
   vertices[i].applyMatrix4(m_model);
@@ -77,9 +120,9 @@ let Ycam = new THREE.Vector3().crossVectors(Zcam, Xcam).normalize();
 let m_bt = new THREE.Matrix4();
 
 m_bt.set(Xcam.x, Xcam.y, Xcam.z, 0.0,
-          Ycam.x, Ycam.y, Ycam.z, 0.0,
-          Zcam.x, Zcam.y, Zcam.z, 0.0,
-          0.0, 0.0, 0.0, 1.0);
+        Ycam.x, Ycam.y, Ycam.z, 0.0,
+        Zcam.x, Zcam.y, Zcam.z, 0.0,
+        0.0, 0.0, 0.0, 1.0);
 
 // Construir a matriz 'm_t' de translação para tratar os casos em que as
 // origens do espaço do universo e da câmera não coincidem.
@@ -108,9 +151,9 @@ for (let i = 0; i < 8; ++i)
 let m_projection = new THREE.Matrix4();
 const distance = 1;
 m_projection.set(1.0, 0.0, 0.0, 0.0,
-                  0.0, 1.0, 0.0, 0.0,
-                  0.0, 0.0, 1.0, distance,
-                  0.0, 0.0, -(1/distance), 0.0);
+                0.0, 1.0, 0.0, 0.0,
+                0.0, 0.0, 1.0, distance,
+                0.0, 0.0, -(1/distance), 0.0);
 
 for (let i = 0; i < 8; ++i)
   vertices[i].applyMatrix4(m_projection);
@@ -127,7 +170,7 @@ for (let i = 0; i < 8; ++i)
  *****************************************************************************/
 
 const x_dimension = 128.0;
-const y_dimension =128.0;
+const y_dimension = 128.0;
 let m_scale = new THREE.Matrix4();
 let m_translation = new THREE.Matrix4();
 m_scale.set(Math.round(x_dimension/2), 0.0, 0.0, 0.0,
@@ -151,4 +194,4 @@ for (let i = 0; i < 8; ++i)
 
 MidPointLineAlgorithm(0, 0, 128, 128, [255, 0, 0, 255], [0, 255, 0, 255], "canvas");
 
-//  color_buffer.putPixel(vertices[6].x, vertices[6].y, [255,0,0]); 
+//  color_buffer.putPixel(vertices[6].x, vertices[6].y, [255,0,0]);
