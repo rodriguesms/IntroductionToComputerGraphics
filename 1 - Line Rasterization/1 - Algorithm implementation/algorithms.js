@@ -1,6 +1,6 @@
 import Canvas from '../module.js';
 
-function MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1, canvas_id="midpoint-canvas") {
+export function MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1, canvas_id="midpoint-canvas") {
 
   let midpoint = new Canvas(canvas_id);
   midpoint.clear();
@@ -66,13 +66,10 @@ function MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1, canvas_id="midp
   }
 }
 
-function DrawTriangle(x0, y0, x1, y1, x2, y2, color_0, color_1, color_2) {
+export function DrawTriangle(x0, y0, x1, y1, x2, y2, color_0, color_1, color_2) {
 
   MidPointLineAlgorithm(x0, y0, x1, y1, color_0, color_1, "triangle-canvas");
   MidPointLineAlgorithm(x1, y1, x2, y2, color_1, color_2, "triangle-canvas");
   MidPointLineAlgorithm(x2, y2, x0, y0, color_2, color_0, "triangle-canvas");
 
 }
-
-MidPointLineAlgorithm(25, 30, 100, 80, [255,0,0,255], [255,255,0,255]);
-DrawTriangle(25, 30, 50, 100, 100, 15, [255,0,0,255], [0,0,255,255], [0,255,0,255]);

@@ -1,4 +1,5 @@
 import Canvas from '../1 - Line Rasterization/module.js'
+import { MidPointLineAlgorithm } from '../1 - Line Rasterization/1 - Algorithm implementation/algorithms.js'
 
 // Cria um color buffer para armazenar a imagem final.
 let color_buffer = new Canvas("canvas");
@@ -11,29 +12,29 @@ color_buffer.clear();
  *****************************************************************************/
 //                                   X     Y     Z    W (coord. homogênea)
 let vertices = [new THREE.Vector4(-1.0, -1.0, -1.0, 1.0),
-                new THREE.Vector4( 1.0, -1.0, -1.0, 1.0),
-                new THREE.Vector4( 1.0, -1.0,  1.0, 1.0),
-                new THREE.Vector4(-1.0, -1.0,  1.0, 1.0),
-                new THREE.Vector4(-1.0,  1.0, -1.0, 1.0),
-                new THREE.Vector4( 1.0,  1.0, -1.0, 1.0),
-                new THREE.Vector4( 1.0,  1.0,  1.0, 1.0),
-                new THREE.Vector4(-1.0,  1.0,  1.0, 1.0)];
+              new THREE.Vector4( 1.0, -1.0, -1.0, 1.0),
+              new THREE.Vector4( 1.0, -1.0,  1.0, 1.0),
+              new THREE.Vector4(-1.0, -1.0,  1.0, 1.0),
+              new THREE.Vector4(-1.0,  1.0, -1.0, 1.0),
+              new THREE.Vector4( 1.0,  1.0, -1.0, 1.0),
+              new THREE.Vector4( 1.0,  1.0,  1.0, 1.0),
+              new THREE.Vector4(-1.0,  1.0,  1.0, 1.0)];
 
 /******************************************************************************
  * As 12 arestas do cubo, indicadas através dos índices dos seus vértices.
  *****************************************************************************/
 let edges = [[0,1],
-             [1,2],
-             [2,3],
-             [3,0],
-             [4,5],
-             [5,6],
-             [6,7],
-             [7,4],
-             [0,4],
-             [1,5],
-             [2,6],
-             [3,7]];
+            [1,2],
+            [2,3],
+            [3,0],
+            [4,5],
+            [5,6],
+            [6,7],
+            [7,4],
+            [0,4],
+            [1,5],
+            [2,6],
+            [3,7]];
 
 /******************************************************************************
  * Matriz Model (modelagem): Esp. Objeto --> Esp. Universo. 
@@ -42,12 +43,12 @@ let edges = [[0,1],
 let m_model = new THREE.Matrix4();
 
 m_model.set(1.0, 0.0, 0.0, 0.0,
-            0.0, 1.0, 0.0, 0.0,
-            0.0, 0.0, 1.0, 0.0,
-            0.0, 0.0, 0.0, 1.0);
+          0.0, 1.0, 0.0, 0.0,
+          0.0, 0.0, 1.0, 0.0,
+          0.0, 0.0, 0.0, 1.0);
 
 for (let i = 0; i < 8; ++i)
-    vertices[i].applyMatrix4(m_model);
+  vertices[i].applyMatrix4(m_model);
 
 /******************************************************************************
  * Parâmetros da camera sintética.
@@ -61,91 +62,93 @@ let cam_up = new THREE.Vector3(0.0,1.0,0.0);      // vetor Up da câmera.
  * OBS: A matriz está carregada inicialmente com a identidade. 
  *****************************************************************************/
 
-  // Derivar os vetores da base da câmera a partir dos parâmetros informados acima.
+// Derivar os vetores da base da câmera a partir dos parâmetros informados acima.
 
-  let cam_dir = new THREE.Vector3().subVectors(cam_look_at, cam_pos); // direction = look at - position
+let cam_dir = new THREE.Vector3().subVectors(cam_look_at, cam_pos); // direction = look at - position
 
-  let Zcam = cam_dir.normalize().multiplyScalar(-1);
+let Zcam = cam_dir.normalize().multiplyScalar(-1);
 
-  let Xcam = new THREE.Vector3().crossVectors(cam_up, Zcam).normalize();
+let Xcam = new THREE.Vector3().crossVectors(cam_up, Zcam).normalize();
 
-  let Ycam = new THREE.Vector3().crossVectors(Zcam, Xcam).normalize();
+let Ycam = new THREE.Vector3().crossVectors(Zcam, Xcam).normalize();
 
-  // Construir 'm_bt', a inversa da matriz de base da câmera.
+// Construir 'm_bt', a inversa da matriz de base da câmera.
 
-  let m_bt = new THREE.Matrix4();
+let m_bt = new THREE.Matrix4();
 
-  m_bt.set(Xcam.x, Xcam.y, Xcam.z, 0.0,
-           Ycam.x, Ycam.y, Ycam.z, 0.0,
-           Zcam.x, Zcam.y, Zcam.z, 0.0,
-           0.0, 0.0, 0.0, 1.0);
-
-  // Construir a matriz 'm_t' de translação para tratar os casos em que as
-  // origens do espaço do universo e da câmera não coincidem.
-
-  let m_t = new THREE.Matrix4();
-
-  let trans_vec = cam_pos;
-
-  m_t.set(1.0, 0.0, 0.0, -trans_vec.x,
-          0.0, 1.0, 0.0, -trans_vec.y,
-          0.0, 0.0, 1.0, -trans_vec.z,
+m_bt.set(Xcam.x, Xcam.y, Xcam.z, 0.0,
+          Ycam.x, Ycam.y, Ycam.z, 0.0,
+          Zcam.x, Zcam.y, Zcam.z, 0.0,
           0.0, 0.0, 0.0, 1.0);
 
-  // Constrói a matriz de visualização 'm_view' como o produto
-  //  de 'm_bt' e 'm_t'.
-  let m_view = m_bt.clone().multiply(m_t);
+// Construir a matriz 'm_t' de translação para tratar os casos em que as
+// origens do espaço do universo e da câmera não coincidem.
 
-  for (let i = 0; i < 8; ++i)
-      vertices[i].applyMatrix4(m_view);
+let m_t = new THREE.Matrix4();
+
+let trans_vec = cam_pos;
+
+m_t.set(1.0, 0.0, 0.0, -trans_vec.x,
+        0.0, 1.0, 0.0, -trans_vec.y,
+        0.0, 0.0, 1.0, -trans_vec.z,
+        0.0, 0.0, 0.0, 1.0);
+
+// Constrói a matriz de visualização 'm_view' como o produto
+//  de 'm_bt' e 'm_t'.
+let m_view = m_bt.clone().multiply(m_t);
+
+for (let i = 0; i < 8; ++i)
+    vertices[i].applyMatrix4(m_view);
 
 /******************************************************************************
  * Matriz de Projecao: Esp. Câmera --> Esp. Recorte
  * OBS: A matriz está carregada inicialmente com a identidade. 
  *****************************************************************************/
 
-  let m_projection = new THREE.Matrix4();
-  const distance = 1;
-  m_projection.set(1.0, 0.0, 0.0, 0.0,
-                   0.0, 1.0, 0.0, 0.0,
-                   0.0, 0.0, 1.0, distance,
-                   0.0, 0.0, -(1/distance), 0.0);
+let m_projection = new THREE.Matrix4();
+const distance = 1;
+m_projection.set(1.0, 0.0, 0.0, 0.0,
+                  0.0, 1.0, 0.0, 0.0,
+                  0.0, 0.0, 1.0, distance,
+                  0.0, 0.0, -(1/distance), 0.0);
 
-  for (let i = 0; i < 8; ++i)
-    vertices[i].applyMatrix4(m_projection);
+for (let i = 0; i < 8; ++i)
+  vertices[i].applyMatrix4(m_projection);
 
 /******************************************************************************
  * Homogeneizacao (divisao por W): Esp. Recorte --> Esp. Canônico
  *****************************************************************************/
 
-  // ---------- implementar aqui ----------------------------------------------
+// ---------- implementar aqui ----------------------------------------------
 
 /******************************************************************************
  * Matriz Viewport: Esp. Canônico --> Esp. Tela
  * OBS: A matriz está carregada inicialmente com a identidade. 
  *****************************************************************************/
 
-  const x_dimension = 128.0;
-  const y_dimension =128.0;
-  let m_scale = new THREE.Matrix4();
-  let m_translation = new THREE.Matrix4();
-  m_scale.set(Math.round(x_dimension/2), 0.0, 0.0, 0.0,
-              0.0,Math.round(y_dimension/2), 0.0, 0.0,
-              0.0, 0.0, 1.0, 0.0,
-              0.0, 0.0, 0.0, 1.0);
-  m_translation.set(1.0, 0.0, 0.0, 1.0,
-                    0.0, 1.0, 0.0, 1.0,
-                    0.0, 0.0, 1.0, 0.0,
-                    0.0, 0.0, 0.0, 1.0);
-  let m_viewport = new THREE.Matrix4().multiplyMatrices(m_scale, m_translation);
+const x_dimension = 128.0;
+const y_dimension =128.0;
+let m_scale = new THREE.Matrix4();
+let m_translation = new THREE.Matrix4();
+m_scale.set(Math.round(x_dimension/2), 0.0, 0.0, 0.0,
+            0.0,Math.round(y_dimension/2), 0.0, 0.0,
+            0.0, 0.0, 1.0, 0.0,
+            0.0, 0.0, 0.0, 1.0);
+m_translation.set(1.0, 0.0, 0.0, 1.0,
+                  0.0, 1.0, 0.0, 1.0,
+                  0.0, 0.0, 1.0, 0.0,
+                  0.0, 0.0, 0.0, 1.0);
+let m_viewport = new THREE.Matrix4().multiplyMatrices(m_scale, m_translation);
 
-  for (let i = 0; i < 8; ++i)
-    vertices[i].applyMatrix4(m_viewport);
+for (let i = 0; i < 8; ++i)
+  vertices[i].applyMatrix4(m_viewport);
 
 /******************************************************************************
  * Rasterização
  *****************************************************************************/
 
-  // ---------- implementar aqui ----------------------------------------------
+// ---------- implementar aqui ----------------------------------------------
 
-  color_buffer.putPixel(vertices[6].x, vertices[6].y, [255,0,0]); 
+MidPointLineAlgorithm(0, 0, 128, 128, [255, 0, 0, 255], [0, 255, 0, 255], "canvas");
+
+//  color_buffer.putPixel(vertices[6].x, vertices[6].y, [255,0,0]); 
