@@ -213,36 +213,69 @@ const sendObjectThroughPipeline = (vertices, edges, objectColor1, objectColor2, 
  * tem comprimento igual a 2.
  *****************************************************************************/
 //                                   X     Y     Z    W (coord. homogênea)
-let cubeVertices = [new THREE.Vector4(-1.0, -1.0, -1.0, 1.0),
+const phi = (1 + Math.sqrt(5))/2;
+let dodecahedronVertices = [
+  new THREE.Vector4(-1.0, -1.0, -1.0, 1.0),
   new THREE.Vector4( 1.0, -1.0, -1.0, 1.0),
   new THREE.Vector4( 1.0, -1.0,  1.0, 1.0),
   new THREE.Vector4(-1.0, -1.0,  1.0, 1.0),
   new THREE.Vector4(-1.0,  1.0, -1.0, 1.0),
   new THREE.Vector4( 1.0,  1.0, -1.0, 1.0),
   new THREE.Vector4( 1.0,  1.0,  1.0, 1.0),
-  new THREE.Vector4(-1.0,  1.0,  1.0, 1.0)];
+  new THREE.Vector4(-1.0,  1.0,  1.0, 1.0),
+  new THREE.Vector4(0.0, phi, (1/phi), 1.0),
+  new THREE.Vector4(0.0, phi, -(1/phi), 1.0),
+  new THREE.Vector4(0.0, -phi, -(1/phi), 1.0),
+  new THREE.Vector4(0.0, -phi, (1/phi), 1.0),
+  new THREE.Vector4((1/phi), 0.0, phi, 1.0),
+  new THREE.Vector4((1/phi), 0.0, -phi, 1.0),
+  new THREE.Vector4(-(1/phi), 0.0, -phi, 1.0),
+  new THREE.Vector4(-(1/phi), 0.0, phi, 1.0),
+  new THREE.Vector4(phi, (1/phi), 0.0, 1.0),
+  new THREE.Vector4(phi, -(1/phi), 0.0, 1.0),
+  new THREE.Vector4(-phi, -(1/phi), 0.0, 1.0),
+  new THREE.Vector4(-phi, (1/phi), 0.0, 1.0)
+];
 
 /******************************************************************************
 * As 12 arestas do cubo, indicadas através dos índices dos seus vértices.
 *****************************************************************************/
-let cubeEdges = [[0,1],
-[1,2],
-[2,3],
-[3,0],
-[4,5],
-[5,6],
-[6,7],
-[7,4],
-[0,4],
-[1,5],
-[2,6],
-[3,7]];
+let dodecahedronEdges = [
+  [2,11],
+  [3,11],
+  [10,11],
+  [0,10],
+  [1,10],
+  [1,13],
+  [13,14],
+  [0,14],
+  [0,18],
+  [3,18],
+  [2,12],
+  [12,15],
+  [3,15],
+  [7,15],
+  [7,19],
+  [18,19],
+  [6,12],
+  [6,8],
+  [7,8],
+  [2,17],
+  [16,17],
+  [6,16],
+  [1,17],
+  [5,16],
+  [5,13],
+  [5,9],
+  [4,9],
+  [4,14],
+  [4,19],
+  [8,9]
+];
 
 const vermelho = [255, 0, 0, 255]
 const azul = [0, 0, 255, 255]
 const verde = [0, 255, 0, 255]
 const branco = [255, 255, 255, 255]
 
-sendObjectThroughPipeline(cubeVertices, cubeEdges, branco, branco, "canvas", 1); // CUBO
-
-
+sendObjectThroughPipeline(dodecahedronVertices, dodecahedronEdges, branco, branco, "canvas", 1); // Dodecaedro
