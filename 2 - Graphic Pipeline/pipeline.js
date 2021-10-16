@@ -90,8 +90,6 @@ m_model.set(1.0, 0.0, 0.0, 0.0,
 
 m_model.multiply(m_model_translation).multiply(m_model_rotation_x).multiply(m_model_rotation_y).multiply(m_model_rotation_z).multiply(m_model_sheer);
 
-console.log(m_model);
-
 for (let i = 0; i < 8; ++i)
   vertices[i].applyMatrix4(m_model);
 
@@ -197,14 +195,5 @@ for (let i = 0; i < 8; ++i)
 edges.forEach(element => {
   MidPointLineAlgorithm(Math.round(vertices[element[0]].x), Math.round(vertices[element[0]].y), 
                         Math.round(vertices[element[1]].x), Math.round(vertices[element[1]].y), 
-                        [255, 0, 0, 255], [255, 0, 0, 255], "canvas");
-  console.log(Math.round(vertices[element[0]].x), Math.round(vertices[element[0]].y), Math.round(vertices[element[0]].z))
-  console.log(Math.round(vertices[element[1]].x), Math.round(vertices[element[1]].y), Math.round(vertices[element[1]].z))
-
+                        [0, 255, 0, 255], [0, 255, 0, 255], "canvas");                 
 });
-
-// ---------- implementar aqui ----------------------------------------------
-
-//MidPointLineAlgorithm(0, 0, 128, 128, [255, 0, 0, 255], [0, 255, 0, 255], "canvas");
-
-//  color_buffer.putPixel(vertices[6].x, vertices[6].y, [255,0,0]);
