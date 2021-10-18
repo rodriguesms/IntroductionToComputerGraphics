@@ -65,11 +65,11 @@ const modelMatrix = (vertices,
  * OBS: A matriz está carregada inicialmente com a identidade. 
  *****************************************************************************/
 
-const viewMatrix = (vertices, camX, camY) => {
+const viewMatrix = (vertices, camX, camY, camZ) => {
 /******************************************************************************
  * Parâmetros da camera sintética.
  *****************************************************************************/
-  let cam_pos = new THREE.Vector3(camX, camY,2.0);     // posição da câmera no esp. do Universo.
+  let cam_pos = new THREE.Vector3(camX, camY, camZ);     // posição da câmera no esp. do Universo.
   let cam_look_at = new THREE.Vector3(0.0,0.0,0.0); // ponto para o qual a câmera aponta.
   let cam_up = new THREE.Vector3(0.0,1.0,0.0);      // vetor Up da câmera.
 
@@ -187,7 +187,7 @@ const rasterization = (vertices, edges, objectColor1, objectColor2, canvasID) =>
 }
 
 const sendObjectThroughPipeline = (vertices, edges, objectColor1, objectColor2, canvasID="canvas", distance, camX=1.3,
-  camY=1.7, rotation_angle_x=0.0, rotation_angle_y=0.0, rotation_angle_z=0.0,
+  camY=1.7, camZ = 2.0, rotation_angle_x=0.0, rotation_angle_y=0.0, rotation_angle_z=0.0,
   x_axis_translation=0.0, y_axis_translation=0.0, z_axis_translation=0.0,
   x_axis_sheer=1.0, y_axis_sheer=1.0, z_axis_sheer=1.0) => {
 
@@ -195,7 +195,7 @@ const sendObjectThroughPipeline = (vertices, edges, objectColor1, objectColor2, 
       x_axis_translation, y_axis_translation, z_axis_translation, x_axis_sheer,
       y_axis_sheer, z_axis_sheer);
     
-    viewMatrix(vertices, camX, camY);
+    viewMatrix(vertices, camX, camY, camZ);
 
     projectionMatrix(vertices, distance);
 
@@ -208,6 +208,10 @@ const sendObjectThroughPipeline = (vertices, edges, objectColor1, objectColor2, 
 }
 
 const phi = (1 + Math.sqrt(5))/2;
+/******************************************************************************
+ * Vértices do modelo (dodecaedro) centralizado no seu espaco do objeto.
+ *****************************************************************************/
+//                                   X     Y     Z    W (coord. homogênea)
 let dodecahedronVertices = [
   new THREE.Vector4(-1.0, -1.0, -1.0, 1.0),
   new THREE.Vector4( 1.0, -1.0, -1.0, 1.0),
@@ -230,7 +234,9 @@ let dodecahedronVertices = [
   new THREE.Vector4(-phi, -(1/phi), 0.0, 1.0),
   new THREE.Vector4(-phi, (1/phi), 0.0, 1.0)
 ];
-
+/******************************************************************************
+* As 30 arestas do dodecaedro, indicadas através dos índices dos seus vértices.
+*****************************************************************************/
 let dodecahedronEdges = [
   [2,11],
   [3,11],
@@ -339,7 +345,7 @@ const verde = [0, 255, 0, 255]
 const branco = [255, 255, 255, 255]
 const ambar = [255, 191, 0, 255]
 
-//sendObjectThroughPipeline(dodecahedronVertices, dodecahedronEdges, branco, branco, "canvas", 1); // Dodecaedro
-//sendObjectThroughPipeline(octahedronVertices, octahedronEdges, verde, verde, "canvas2", 1, 0.5, 0.5); // Dodecaedro
-sendObjectThroughPipeline(cubeVertices, cubeEdges, vermelho, vermelho, "canvas", 1);
-sendObjectThroughPipeline(triforceVertices, triforceEdges, ambar, ambar, "canvas2", 1, 0.0, 0.0);
+sendObjectThroughPipeline(dodecahedronVertices, dodecahedronEdges, branco, azul, "canvas", 3, 0, 0, 8, Math.PI/3, Math.PI/4, Math.PI/6, 1, 1, 0, 0.45, 0.55, 0.65); // Dodecaedro
+sendObjectThroughPipeline(octahedronVertices, octahedronEdges, verde, branco, "canvas2", 5, 0, 0, 10, Math.PI/4, Math.PI/6, Math.PI/3, 1, 1, 0, 0.25, 0.15, 0.35); // Octaedro
+sendObjectThroughPipeline(cubeVertices, cubeEdges, vermelho, ambar, "canvas",1 , 1, 1, 4, Math.PI/6, Math.PI/3, Math.PI/4, 0, 0, 0, 0.5, 0.75, 0.25);//cubo
+sendObjectThroughPipeline(triforceVertices, triforceEdges, ambar, ambar, "canvas2", 1, 0.0, 0.0, 2, 0, 0, 0, 0, 0, 0, 0.5, 0.5, 0.5);
