@@ -12,7 +12,7 @@ camera.position.z = 25;
 scene.add(camera);
 
 // Criação do objeto Three.js responsável por realizar o rendering.
-let renderer = new THREE.WebGLRenderer({ alpha: true});
+let renderer = new THREE.WebGLRenderer({ alpha: true });
 renderer.setSize(512, 512);
 document.getElementById('model1').appendChild(renderer.domElement);
 
@@ -81,6 +81,9 @@ material.vertexShader = `
     //     e será interpolado durante a rasterização das primitivas, ficando disponível para cada fragmento gerado pela rasterização.
     
     varying vec4 I;
+    varying vec3 termoDifuso;
+    varying vec3 termoAmbiente;
+    varying vec3 termoEspecular;
 
     // Programa principal do Vertex Shader.
 
@@ -121,11 +124,25 @@ material.vertexShader = `
         //
         ///////////////////////////////////////////////////////////////////////////////
 
+        // I = Ip * kd * (N * L)
+
+        vec3 vCam = normalize(vec3(P_cam_spc));
+
+        float tamanhoBrilhoEspecular = 16.0;
+
+        termoAmbiente = vec3(Ia * k_a);
+
+        termoDifuso = vec3(Ip_diffuse_color * k_d * max(0.0, dot(N_cam_spc, L_cam_spc)));
+
+        termoEspecular = vec3(Ip_diffuse_color * k_s * pow(max(0.0, dot(R_cam_spc, vCam)), tamanhoBrilhoEspecular));
+
+        I = vec4(termoAmbiente + termoDifuso + termoEspecular, 1.0);
+
         // 'I' : cor final (i.e. intensidade) do vértice.
         //     Neste caso, a cor retornada é vermelho. Para a realização do exercício, o aluno deverá atribuir a 'I' o valor
         //     final gerado pelo modelo local de iluminação implementado.
         
-        I = vec4(1, 0, 0, 1); 
+        // I = vec4(1, 0, 0, 1); 
 
         // 'gl_Position' : variável de sistema que conterá a posição final do vértice transformado pelo Vertex Shader.
         
