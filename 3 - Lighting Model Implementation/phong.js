@@ -61,26 +61,14 @@ let material = new THREE.ShaderMaterial({
 // Vertex Shader
 //----------------------------------------------------------------------------
 material.vertexShader = `
-    // 'uniform' contendo informação sobre a fonte de luz ambiente.
-    
-    uniform vec3 Ia;
-    
     // 'uniforms' contendo informações sobre a fonte de luz pontual.
     
     uniform vec3 Ip_position;
-    uniform vec3 Ip_diffuse_color;
 
-    // 'uniforms' contendo informações sobre as reflectâncias do objeto.
-    
-    uniform vec3 k_a;
-    uniform vec3 k_d;
-    uniform vec3 k_s;
-
-    // 'I' : Variável que armazenará a cor final (i.e. intensidade) do vértice, após a avaliação do modelo local de iluminação.
-    //     A variável 'I' é do tipo 'varying', ou seja, seu valor será calculado pelo Vertex Shader (por vértice)
-    //     e será interpolado durante a rasterização das primitivas, ficando disponível para cada fragmento gerado pela rasterização.
-    
-    varying vec4 I;
+    varying vec3 N_cam_spc;
+    varying vec3 L_cam_spc;
+    varying vec3 R_cam_spc;
+    varying vec3 vCam;
 
     // Programa principal do Vertex Shader.
 
@@ -99,37 +87,26 @@ material.vertexShader = `
         
         vec4 P_cam_spc = modelViewMatrix * vec4(position, 1.0);
 
+        // 'gl_Position' : variável de sistema que conterá a posição final do vértice transformado pelo Vertex Shader.
+        
+        gl_Position = projectionMatrix * P_cam_spc;
+
         // 'normal' : variável de sistema que contém o vetor normal do vértice (vec3) no espaço do objeto.
         // 'normalMatrix' : variável de sistema que contém a matriz de normais (3x3) gerada a partir da matriz 'modelViewMatrix'.
         
-        vec3 N_cam_spc = normalize(normalMatrix * normal);
+        N_cam_spc = normalize(normalMatrix * normal);
 
         // 'normalize()' : função do sistema que retorna o vetor de entrada normalizado (i.e. com comprimento = 1).
         // 'L_cam_spc' : variável que contém o vetor unitário, no Espaço de Câmera, referente à fonte de luz.
         
-        vec3 L_cam_spc = normalize(Ip_pos_cam_spc.xyz - P_cam_spc.xyz);
+        L_cam_spc = normalize(Ip_pos_cam_spc.xyz - P_cam_spc.xyz);
 
         // 'reflect()' : função do sistema que retorna 'R_cam_spc', isto é, o vetor 'L_cam_spc' refletido 
         //     em relação o vetor 'N_cam_spc'.
         
-        vec3 R_cam_spc = reflect(L_cam_spc, N_cam_spc);
+        R_cam_spc = reflect(L_cam_spc, N_cam_spc);
 
-        ///////////////////////////////////////////////////////////////////////////////
-        //
-        // Escreva aqui o seu código para implementar os modelos de iluminação com 
-        // Gouraud Shading (interpolação por vértice). 
-        //
-        ///////////////////////////////////////////////////////////////////////////////
-
-        // 'I' : cor final (i.e. intensidade) do vértice.
-        //     Neste caso, a cor retornada é vermelho. Para a realização do exercício, o aluno deverá atribuir a 'I' o valor
-        //     final gerado pelo modelo local de iluminação implementado.
-        
-        I = vec4(1, 0, 0, 1); 
-
-        // 'gl_Position' : variável de sistema que conterá a posição final do vértice transformado pelo Vertex Shader.
-        
-        gl_Position = projectionMatrix * P_cam_spc;
+        vCam = normalize(vec3(P_cam_spc));
     }
     `;
 
@@ -137,17 +114,42 @@ material.vertexShader = `
 // Fragment Shader
 //----------------------------------------------------------------------------
 material.fragmentShader = `
-    // 'I' : valor de cor originalmente calculada pelo Vertex Shader, e já interpolada para o fragmento corrente.
+    // 'uniform' contendo informação sobre a fonte de luz ambiente.
+        
+    uniform vec3 Ia;
+
+    // 'uniforms' contendo informações sobre a fonte de luz pontual.    
+    uniform vec3 Ip_diffuse_color;
+
+    // 'uniforms' contendo informações sobre as reflectâncias do objeto.
     
-    varying vec4 I;
+    uniform vec3 k_a;
+    uniform vec3 k_d;
+    uniform vec3 k_s;
+
+    varying vec3 N_cam_spc;
+    varying vec3 L_cam_spc;
+    varying vec3 R_cam_spc;
+    varying vec3 vCam;
 
     // Programa principal do Fragment Shader.
 
     void main() {
+        vec3 N = normalize(N_cam_spc);
+        vec3 L = normalize(L_cam_spc);
+        vec3 R = normalize(R_cam_spc);
+        vec3 V = normalize(vCam);
+        float n = 16.0;
+
+        vec3 termoAmbiente = vec3(Ia * k_a);
+        vec3 termoDifuso = vec3(Ip_diffuse_color * k_d * max(0.0, dot(N, L)));
+        vec3 termoEspecular = vec3(Ip_diffuse_color * k_s * pow(max(0.0, dot(R, V)), n));
+
+        vec4 fragmentColor = vec4(termoAmbiente + termoDifuso + termoEspecular, 1.0);
     
         // 'gl_FragColor' : variável de sistema que conterá a cor final do fragmento calculada pelo Fragment Shader.
         
-        gl_FragColor = I;
+        gl_FragColor = fragmentColor;
     }
     `;
 
