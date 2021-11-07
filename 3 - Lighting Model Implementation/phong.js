@@ -123,7 +123,7 @@ material.fragmentShader = `
     void main() {
         vec3 N = normalize(N_cam_spc);
         vec3 L = normalize(Ip_pos_cam_spc.xyz - P_cam_spc.xyz);
-        vec3 R = reflect(L, N_cam_spc);
+        vec3 R = normalize(reflect(L, N_cam_spc));
         vec3 V = normalize(vec3(P_cam_spc));
         float n = 16.0;
 
