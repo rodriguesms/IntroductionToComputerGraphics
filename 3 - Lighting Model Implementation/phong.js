@@ -66,9 +66,8 @@ material.vertexShader = `
     uniform vec3 Ip_position;
 
     varying vec3 N_cam_spc;
-    varying vec3 L_cam_spc;
-    varying vec3 R_cam_spc;
-    varying vec3 vCam;
+    varying vec4 Ip_pos_cam_spc;
+    varying vec4 P_cam_spc;
 
     // Programa principal do Vertex Shader.
 
@@ -77,7 +76,7 @@ material.vertexShader = `
         // 'modelViewMatrix' : variável de sistema que contém a matriz ModelView (4x4).
         // 'Ip_pos_cam_spc' : variável que armazenará a posição da fonte de luz no Espaço da Câmera.
         
-        vec4 Ip_pos_cam_spc = modelViewMatrix * vec4(Ip_position, 1.0);
+        Ip_pos_cam_spc = modelViewMatrix * vec4(Ip_position, 1.0);
 
         // 'position' : variável de sistema que contém a posição do vértice (vec3) no espaço do objeto.
         // 'P_cam_spc' : variável que contém o vértice (i.e. 'position') transformado para o Espaço de Câmera.
@@ -85,7 +84,7 @@ material.vertexShader = `
         //     (i.e., acrescentando-se uma coordenada adicional w = 1.0) para poder ser multiplicado pela
         //     matriz 'modelViewMatrix' (que é 4x4).
         
-        vec4 P_cam_spc = modelViewMatrix * vec4(position, 1.0);
+        P_cam_spc = modelViewMatrix * vec4(position, 1.0);
 
         // 'gl_Position' : variável de sistema que conterá a posição final do vértice transformado pelo Vertex Shader.
         
@@ -95,18 +94,6 @@ material.vertexShader = `
         // 'normalMatrix' : variável de sistema que contém a matriz de normais (3x3) gerada a partir da matriz 'modelViewMatrix'.
         
         N_cam_spc = normalize(normalMatrix * normal);
-
-        // 'normalize()' : função do sistema que retorna o vetor de entrada normalizado (i.e. com comprimento = 1).
-        // 'L_cam_spc' : variável que contém o vetor unitário, no Espaço de Câmera, referente à fonte de luz.
-        
-        L_cam_spc = normalize(Ip_pos_cam_spc.xyz - P_cam_spc.xyz);
-
-        // 'reflect()' : função do sistema que retorna 'R_cam_spc', isto é, o vetor 'L_cam_spc' refletido 
-        //     em relação o vetor 'N_cam_spc'.
-        
-        R_cam_spc = reflect(L_cam_spc, N_cam_spc);
-
-        vCam = normalize(vec3(P_cam_spc));
     }
     `;
 
@@ -128,17 +115,16 @@ material.fragmentShader = `
     uniform vec3 k_s;
 
     varying vec3 N_cam_spc;
-    varying vec3 L_cam_spc;
-    varying vec3 R_cam_spc;
-    varying vec3 vCam;
+    varying vec4 Ip_pos_cam_spc;
+    varying vec4 P_cam_spc;
 
     // Programa principal do Fragment Shader.
 
     void main() {
         vec3 N = normalize(N_cam_spc);
-        vec3 L = normalize(L_cam_spc);
-        vec3 R = normalize(R_cam_spc);
-        vec3 V = normalize(vCam);
+        vec3 L = normalize(Ip_pos_cam_spc.xyz - P_cam_spc.xyz);
+        vec3 R = reflect(L, N_cam_spc);
+        vec3 V = normalize(vec3(P_cam_spc));
         float n = 16.0;
 
         vec3 termoAmbiente = vec3(Ia * k_a);
