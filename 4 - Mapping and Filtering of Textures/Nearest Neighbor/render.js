@@ -67,12 +67,12 @@ sceneCanvas2.add(cameraCanvas2);
 let rendererCanvas1 = new THREE.WebGLRenderer({canvas: document.getElementById("canvas1"), alpha: true});
 rendererCanvas1.setPixelRatio( window.devicePixelRatio );
 rendererCanvas1.setSize( 720, 360 );
-document.getElementById("object").appendChild(rendererCanvas1.domElement);
+document.getElementById("objects").appendChild(rendererCanvas1.domElement);
 
 let rendererCanvas2 = new THREE.WebGLRenderer({canvas: document.getElementById("canvas2"), alpha: true});
 rendererCanvas2.setPixelRatio( window.devicePixelRatio );
 rendererCanvas2.setSize( 720, 360 );
-document.getElementById("object").appendChild(rendererCanvas2.domElement);
+document.getElementById("objects").appendChild(rendererCanvas2.domElement);
 
 
 let controlsCanvas2 = new OrbitControls(cameraCanvas2, rendererCanvas2.domElement);
