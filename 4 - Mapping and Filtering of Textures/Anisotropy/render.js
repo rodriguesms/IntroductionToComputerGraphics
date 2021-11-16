@@ -120,6 +120,20 @@ controlsCanvas1.dampingFactor = 0.2;
 controlsCanvas1.rotateSpeed = 0.2;
 controlsCanvas1.screenSpacePanning = true;
 
+controlsCanvas1.addEventListener( 'change', () => {
+
+  cameraCanvas2.position.copy( cameraCanvas1.position );
+  cameraCanvas2.rotation.copy( cameraCanvas1.rotation );
+  render();
+
+} );
+controlsCanvas2.addEventListener( 'change', () => {
+
+  cameraCanvas1.position.copy( cameraCanvas2.position );
+  cameraCanvas1.rotation.copy( cameraCanvas2.rotation );
+  render();
+
+} );
 
 let geometryCanvas2 = new THREE.BoxGeometry(1, 1, 1);
 let geometryCanvas1 = new THREE.BoxGeometry(1, 1, 1);

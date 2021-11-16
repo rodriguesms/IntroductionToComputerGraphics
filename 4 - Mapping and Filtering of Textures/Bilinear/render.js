@@ -72,15 +72,29 @@ document.getElementById("object").appendChild(rendererGateBilinear.domElement);
 let controlsGateBilinear = new OrbitControls(cameraGateBilinear, rendererGateBilinear.domElement);
 controlsGateBilinear.enableDamping = true;
 controlsGateBilinear.dampingFactor = 0.2;
-controlsGateBilinear.rotateSpeed = 0.05;
+controlsGateBilinear.rotateSpeed = 0.2;
 controlsGateBilinear.screenSpacePanning = true;
 
 let controlsGateNearestPoint = new OrbitControls(cameraGateNearestPoint, rendererGateNearestPoint.domElement);
 controlsGateNearestPoint.enableDamping = true;
 controlsGateNearestPoint.dampingFactor = 0.2;
-controlsGateNearestPoint.rotateSpeed = 0.05;
+controlsGateNearestPoint.rotateSpeed = 0.2;
 controlsGateNearestPoint.screenSpacePanning = true;
 
+controlsGateNearestPoint.addEventListener( 'change', () => {
+
+  cameraGateBilinear.position.copy( cameraGateNearestPoint.position );
+  cameraGateBilinear.rotation.copy( cameraGateNearestPoint.rotation );
+  render();
+
+} );
+controlsGateBilinear.addEventListener( 'change', () => {
+
+  cameraGateNearestPoint.position.copy( cameraGateBilinear.position );
+  cameraGateNearestPoint.rotation.copy( cameraGateBilinear.rotation );
+  render();
+
+} );
 
 let geometryGateBilinear = new THREE.BoxGeometry(1, 1, 1);
 let geometryGateNearestPoint = new THREE.BoxGeometry(1, 1, 1);
