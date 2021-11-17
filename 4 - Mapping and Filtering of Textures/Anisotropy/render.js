@@ -35,6 +35,9 @@ let textureChess4x = new THREE.Texture(chess1x);
 let textureChess8x = new THREE.Texture(chess1x);
 let textureChess16x = new THREE.Texture(chess16x);
 
+//------------------------------------------------------------------------------
+//--------- Declaração dos objetos de diferentes filtros anisotrópicos----------
+//------------------------------------------------------------------------------
 
 chess1x.onload = () => {
   textureChess1x.needsUpdate = true;
@@ -80,6 +83,9 @@ chess16x.onload = function() {
     textureChess16x.wrapS = THREE.RepeatWrapping;
     textureChess16x.wrapT = THREE.RepeatWrapping;
 };
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 
 let sceneCanvas1 = new THREE.Scene();
@@ -170,14 +176,18 @@ sceneCanvas1.add(point_light3Canvas1);
 //----------------------------------------------------------------------------
 // Criação do material difuso. A textura define a reflectância difusa (k_d) 
 // do material.
+// Altere aqui o objeto com filtro de textura máx. (1x, 2x, 4x, 8x, 16x)
 //----------------------------------------------------------------------------
-let materialCanvas2 = new THREE.MeshLambertMaterial({
+let materialCanvas2 = new THREE.MeshLambertMaterial({ // Cubo direito
     map: textureChess16x
 });
 
-let materialCanvas1 = new THREE.MeshLambertMaterial({
+let materialCanvas1 = new THREE.MeshLambertMaterial({ // Cubo esquerdo
   map: textureChess1x
 });
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
 
 
 var object_meshCanvas2 = new THREE.Mesh(geometryCanvas2, materialCanvas2);

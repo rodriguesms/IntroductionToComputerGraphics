@@ -162,11 +162,11 @@ sceneCanvas1.add(point_light3Canvas1);
 // do material.
 //----------------------------------------------------------------------------
 let materialCanvas2 = new THREE.MeshLambertMaterial({
-    map: textureChessLL//aqui você pode definir a textura do cubo da direita como qualquer uma das 4 entre: textureChessNN, textureChessNL, textureChessLN, textureChessLL.
+    map: textureChessNL//aqui você pode definir a textura do cubo da direita como qualquer uma das 4 entre: textureChessNN, textureChessNL, textureChessLN, textureChessLL.
 });
 
 let materialCanvas1 = new THREE.MeshLambertMaterial({
-  map: textureChessNN//aqui você pode definir a textura do cubo da esquerda como qualquer uma das 4 entre: textureChessNN, textureChessNL, textureChessLN, textureChessLL.
+  map: textureChessLN//aqui você pode definir a textura do cubo da esquerda como qualquer uma das 4 entre: textureChessNN, textureChessNL, textureChessLN, textureChessLL.
 });
 
 
