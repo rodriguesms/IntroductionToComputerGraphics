@@ -169,18 +169,24 @@ function Render() {
         let ka = new THREE.Vector3(1.0, 0.0, 0.0);  // Coeficiente de reflectancia ambiente da esfera.
         let kd = new THREE.Vector3(1.0, 0.0, 0.0);  // Coeficiente de reflectancia difusa da esfera.
         let Ia = new THREE.Vector3(0.2, 0.2, 0.2);  // Intensidade da luz ambiente. 
-
+        let ks = new THREE.Vector3(1.0, 1.0, 1.0);
         let termo_ambiente = Ia.clone().multiply(ka); // Calculo do termo ambiente do modelo local de iluminacao.
-
         let L = (Ip.posicao.clone().sub(interseccao.posicao)).normalize(); // Vetor que aponta para a fonte e luz pontual.
+        let n = 32;
+        let v = new THREE.Vector3().subVectors(interseccao.posicao, raio.origem).normalize();
+        let r = L.clone().reflect(interseccao.normal).normalize();
+
 
         // Calculo do termo difuso do modelo local de iluminacao.
         let termo_difuso = (Ip.cor.clone().multiply(kd)).multiplyScalar(Math.max(0.0, interseccao.normal.dot(L)));
-        
-        PutPixel(x, y, termo_difuso.add(termo_ambiente)); // Combina os termos difuso e ambiente e pinta o pixel.
+
+        let termoEspecular = (Ip.cor.clone().multiply(ks)).multiplyScalar(Math.pow(Math.max(0.0, r.dot(v)), n));
+
+        PutPixel(x, y, termo_difuso.add(termo_ambiente.add(termoEspecular))); // Combina os termos difuso e ambiente e pinta o pixel.
       } /*else // Senao houver interseccao entao...
         PutPixel(x, y, new THREE.Vector3(0.25, 0.25, 0.25)); // Pinta o pixel com a cor de fundo.*/
-    }
+        //Não pintei o fundo de preto, para que o background fosse a própria página, desse modo, apenas a esfera foi pintada
+      }
 }
 
 Render(); // Invoca o ray tracer.
