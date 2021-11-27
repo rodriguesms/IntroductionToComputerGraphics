@@ -154,7 +154,7 @@ class Luz {
 ///////////////////////////////////////////////////////////////////////////////
 function Render() {
   let camera = new Camera();
-  let s1 = new Esfera(new THREE.Vector3(0.0, 0.0,-3.0), 1.0);
+  let s1 = new Esfera(new THREE.Vector3(0.0, 0.0,-3.0), 1.5);
   let Ip = new Luz(new THREE.Vector3(-10.0, 10.0, 4.0), new THREE.Vector3(0.8, 0.8, 0.8));
 
   // Lacos que percorrem os pixels do sensor.
