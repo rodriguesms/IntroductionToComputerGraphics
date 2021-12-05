@@ -132,6 +132,45 @@ class Esfera {
   }
 }
 
+class Triangle{
+  constructor(v0, v1, v2){
+    this.v0 = v0;
+    this.v1 = v1;
+    this.v2 = v2;
+  }
+
+  interseccionar(raio, interseccao){
+    const epslon = 1e-8;
+    let v0v1 = new THREE.Vector3(0.0, 0.0, 0.0);
+    let v0v2 = new THREE.Vector3(0.0, 0.0, 0.0);
+    let pvec = new THREE.Vector3(0.0, 0.0, 0.0);
+    let tvec = new THREE.Vector3(0.0, 0.0, 0.0);
+    let qvec = new THREE.Vector3(0.0, 0.0, 0.0);
+    v0v1 = this.v1.clone().sub(this.v0);
+    v0v2 = this.v2.clone().sub(this.v0);
+    pvec = raio.direcao.clone().cross(v0v2);
+    let det = v0v1.clone().dot(pvec);
+    if(Math.abs(det) < epslon)
+      return false;
+    
+    let invDet = 1 / det;
+    tvec = raio.origem.clone().sub(this.v0);
+    let u = tvec.dot(pvec) * invDet;
+    if(u < 0 || u > 1)
+      return false;
+    
+    qvec = tvec.cross(v0v1);
+    let v =  raio.direcao.dot(qvec) * invDet;
+    if(v < 0 || v + u > 1)
+      return false;
+    
+    interseccao.t = v0v2.clone().dot(qvec) * invDet;
+    interseccao.posicao = raio.origem.clone().add(raio.direcao.clone().multiplyScalar(interseccao.t));
+    interseccao.normal = (v0v2.cross(v0v1)).normalize();
+    return true;
+  }
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Classe que representa uma fonte de luz pontual.
 // Construtor: 
@@ -154,7 +193,7 @@ class Luz {
 ///////////////////////////////////////////////////////////////////////////////
 function Render() {
   let camera = new Camera();
-  let s1 = new Esfera(new THREE.Vector3(0.0, 0.0,-3.0), 1.5);
+  let s1 = new Triangle(new THREE.Vector3(-1.0, -1.0, -3.5), new THREE.Vector3(1.0, 1.0, -3.0), new THREE.Vector3(0.75, -1.0, -2.5));
   let Ip = new Luz(new THREE.Vector3(-10.0, 10.0, 4.0), new THREE.Vector3(0.8, 0.8, 0.8));
 
   // Lacos que percorrem os pixels do sensor.
@@ -162,7 +201,7 @@ function Render() {
     for (let x = 0; x < 512; ++x) {
 
       let raio = camera.raio(x,y); // Construcao do raio primario que passa pelo centro do pixel de coordenadas (x,y).
-      let interseccao = new Interseccao(); 
+      let interseccao = new Interseccao();
 
       if (s1.interseccionar(raio, interseccao)) { // Se houver interseccao entao...
 
