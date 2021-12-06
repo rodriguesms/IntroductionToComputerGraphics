@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width-device-width, initial-scale=1.0" />
+    <title>Ray Tracing</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section class="body">
+      <nav>
+        <a href="../Primitives/index.html">Ray Tracing</a>
+        <div class="nav-links">
+          <ul>
+            <li><a href="../Primitives/index.html">Primitives</a></li>
+            •
+            <li><a href="../Scene/index.html">Scene</a></li>
+          </ul>
+        </div>
+      </nav>
+      <div class="content">
+        <h1>Scene</h1>
+        <p>Render a scene that shows how the Ray Tracer works.</p>
+        <div class="draw" style="display: flex; flex-direction: column;">
+          <canvas
+            id="canvas"
+            width="512"
+            height="512"
+            style="width: 512px; height: 512px; image-rendering: pixelated"
+          ></canvas>
+          <p>Merry Christmas.</p>
+          <script src="http://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.js"></script>
+          <script type="module" src="./scene.js" />
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
